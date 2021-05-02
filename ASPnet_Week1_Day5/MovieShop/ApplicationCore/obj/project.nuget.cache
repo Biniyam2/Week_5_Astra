@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IPtmqDMmWh9ZZlRzYYp4uhN4Y71tZziHI8EI17foVSD1o5Tk2pmnyW2lDfVRW3HjD/LrSEweeB0/jOtKhAAYIg==",
+  "dgSpecHash": "+g2IzlUZq4wbgN5FFPOhA7hmEWWYO7O5L5Coi5+LHoJX8Xq7XvlNC9SwmgYReg98VGpYHrGTY1p85oymhGZU5g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Biniyam\\Desktop\\AspClass\\Week 5\\Week5Day3\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
+  "projectFilePath": "C:\\Users\\Biniyam\\Desktop\\AspClass\\Week 5\\Week5Day5\\MovieShop\\ApplicationCore\\ApplicationCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Biniyam\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Biniyam\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

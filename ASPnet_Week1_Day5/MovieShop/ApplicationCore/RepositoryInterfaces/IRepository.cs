@@ -10,9 +10,9 @@ namespace ApplicationCore.RepsoitoryInterfaces
     {
         public T GetById(int id);
         public IEnumerable<T> GetAll();
-        public int Insert(T type);
-        public int Update(T type);
-        public int Delete (T type);
-        public int StoreProcedure(T item);
+        public void Insert(T type);
+        public void Update(T type);
+        public void Delete (T type);
+        public void StoreProcedure(T item);
     }
 }
