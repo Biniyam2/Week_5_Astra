@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lJJw3hjpV8qCQVR/QnfD5WjtnNel8D9uaIFlscptIgmRupqlLKkGsCGR6GG1nJ5FhfY54Ds4h8rZBoZZCTM+zA==",
+  "dgSpecHash": "UDkikKDo7AIEV4/fNp69yr7Cbow7jd5jS10IdgEDvwGPtmOv39yhktGBMjXv6M7g8qoMnk2K8FOD02XGSYuYVw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Biniyam\\Desktop\\AspClass\\Week 5\\Week5Day5\\MovieShop\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Biniyam\\Desktop\\AspClass\\Week_5_Astra\\ASPnet_Week1_Day5\\MovieShop\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Biniyam\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Biniyam\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
