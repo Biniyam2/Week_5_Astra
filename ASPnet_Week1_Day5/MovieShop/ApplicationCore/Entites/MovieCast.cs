@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entites
 {
+    [Table("MovieCast")]
     public class MovieCast
     {
 

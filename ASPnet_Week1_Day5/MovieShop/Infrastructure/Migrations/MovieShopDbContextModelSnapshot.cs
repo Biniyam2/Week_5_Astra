@@ -37,12 +37,13 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(2084)
                         .HasColumnType("nvarchar(2084)");
 
-                    b.Property<string>("TmbdUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("TmdbUrl")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TmdbUrl");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Casts");
+                    b.ToTable("Cast");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Crew", b =>
@@ -68,7 +69,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Crews");
+                    b.ToTable("Crew");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Favorite", b =>
@@ -90,7 +91,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("Favorite");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Genre", b =>
@@ -107,7 +108,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Genre");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Movie", b =>
@@ -121,13 +122,15 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(2084)
                         .HasColumnType("nvarchar(2084)");
 
-                    b.Property<decimal>("Budget")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal?>("Budget")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(9.9m);
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreateDate")
+                    b.Property<DateTime?>("CreateDate")
                         .HasColumnType("DateTime2");
 
                     b.Property<string>("ImdbUrl")
@@ -141,20 +144,25 @@ namespace Infrastructure.Migrations
                     b.Property<string>("OverView")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostUrl")
+                    b.Property<string>("PosterUrl")
                         .HasMaxLength(2084)
-                        .HasColumnType("nvarchar(2084)");
+                        .HasColumnType("nvarchar(2084)")
+                        .HasColumnName("PosterUrl");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(5,2)");
+                    b.Property<decimal?>("Price")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(5,2)")
+                        .HasDefaultValue(9.9m);
 
-                    b.Property<DateTime>("ReleaseDate")
+                    b.Property<DateTime?>("ReleaseDate")
                         .HasColumnType("DateTime2");
 
-                    b.Property<decimal>("Revenue")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<decimal?>("Revenue")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,2)")
+                        .HasDefaultValue(9.9m);
 
-                    b.Property<int>("RunTime")
+                    b.Property<int?>("RunTime")
                         .HasColumnType("int");
 
                     b.Property<string>("Tagline")
@@ -173,12 +181,12 @@ namespace Infrastructure.Migrations
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdateDate")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("DateTime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movie");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.MovieCast", b =>
@@ -197,7 +205,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("MovieCasts");
+                    b.ToTable("MovieCast");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.MovieCrew", b =>
@@ -220,7 +228,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("CrewId");
 
-                    b.ToTable("MovieCrews");
+                    b.ToTable("MovieCrew");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.MovieGenre", b =>
@@ -235,7 +243,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("GenreId");
 
-                    b.ToTable("MovieGenres");
+                    b.ToTable("MovieGenre");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Purchase", b =>
@@ -266,7 +274,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Purchases");
+                    b.ToTable("Purchase");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Review", b =>
@@ -287,7 +295,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Review");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Role", b =>
@@ -303,7 +311,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Trailer", b =>
@@ -328,7 +336,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Trailers");
+                    b.ToTable("Trailer");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.User", b =>
@@ -338,10 +346,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccessFaildCount")
+                    b.Property<int?>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -353,16 +361,16 @@ namespace Infrastructure.Migrations
                     b.Property<string>("HashedPassword")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("IsLocked")
+                    b.Property<byte?>("IsLocked")
                         .HasColumnType("tinyint");
 
-                    b.Property<DateTime>("LastLodinDateTime")
+                    b.Property<DateTime?>("LastLoginDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("LockoutEndDate")
+                    b.Property<DateTime?>("LockoutEndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
@@ -371,12 +379,12 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Salt")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("TowFactorEnabled")
+                    b.Property<byte?>("TwoFactorEnabled")
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.UserRole", b =>
@@ -391,7 +399,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("ApplicationCore.Entites.Favorite", b =>

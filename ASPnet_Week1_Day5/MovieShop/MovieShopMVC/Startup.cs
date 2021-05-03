@@ -34,7 +34,7 @@ namespace MovieShopMVC
             services.AddControllersWithViews();
             services.AddDbContext<MovieShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieShowDB")));
             //************** Services **********************
-            services.AddTransient<IMovieService, MovieService>();
+           // services.AddTransient<IM, MovieService>();
             //************** Repositorys ************************
             services.AddTransient<IRepository<Cast>, CastRepository>();
             services.AddTransient<IRepository<Crew>, CrewRepository>();

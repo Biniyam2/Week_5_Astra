@@ -7,7 +7,7 @@ using ApplicationCore.Entites;
 
 namespace ApplicationCore.Models.Response.CrewResponse
 {
-    public class FetchCrewRepository 
+    public class FetchCrewResponse 
     {
         public int CrewsPerPage { get; set; }
         public bool HasPreviousPages { get; set; }

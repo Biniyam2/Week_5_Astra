@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entites
 {
+    [Table("MovieCrew")]
     public class MovieCrew
     {
         [ForeignKey("Crew"), Key, Required]

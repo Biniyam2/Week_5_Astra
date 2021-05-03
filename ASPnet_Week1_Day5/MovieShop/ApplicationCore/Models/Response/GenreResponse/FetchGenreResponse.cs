@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models.Response.GenreResponse
 {
-    public class FetchGenreRepsonse
+    public class FetchGenreResponse
     {
         public int GenrePerPage { get; set; }
         public bool HasPreviousPages { get; set; }

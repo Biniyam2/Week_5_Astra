@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entites
 {
+    [Table("Favorite")]
     public class Favorite
     {
         [Key, Required]

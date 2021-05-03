@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entites
 {
+    [Table("Purchase")]
     public class Purchase
     {
         [Key, Required]

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models.Resquest.CastRequst
 {
-    public class DeleteCastRequst
+    public class GetCastRequest
     {
         public int Id { get; set; }
     }

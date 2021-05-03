@@ -23,8 +23,8 @@ namespace MovieShopMVC.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var movies = _movieService.GetTopRevenueMovies();
-            return View(movies);
+           // var movies = _movieService.GetTopRevenueMovies();
+            return View(/*movies*/);
         }
         [HttpGet]
         public IActionResult Privacy()

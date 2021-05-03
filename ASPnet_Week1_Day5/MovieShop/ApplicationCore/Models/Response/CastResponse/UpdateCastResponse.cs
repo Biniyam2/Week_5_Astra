@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models.Response.CastResponse
 {
-    public class UpdateCastRepsonse
+    public class UpdateCastResponse
     {
         public Cast Cast { get; set; }
     }

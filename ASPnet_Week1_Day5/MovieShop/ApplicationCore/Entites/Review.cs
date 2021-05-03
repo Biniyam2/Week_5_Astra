@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entites
 {
+    [Table("Review")]
     public class Review
     {
         [ForeignKey("Movie"), Key, Required]

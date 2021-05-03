@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models.Response.UserRoleResponse
 {
-     public class DeleteRoleResponse
+     public class DeleteUserRoleResponse
     {
         public UserRole UserRole { get; set; }
     }

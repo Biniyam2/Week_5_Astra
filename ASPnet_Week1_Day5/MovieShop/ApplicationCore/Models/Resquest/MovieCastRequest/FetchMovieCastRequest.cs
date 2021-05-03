@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models.Resquest.MovieCastRequest
 {
-    public class FetchMovieCrewRequest
+    public class FetchMovieCastRequest
     {
         public int PageNumebr { get; set; }
         public int MovieCastsPerPage { get; set; }

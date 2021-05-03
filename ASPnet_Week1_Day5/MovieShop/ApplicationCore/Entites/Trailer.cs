@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entites
 {
+    [Table("Trailer")]
     public class Trailer
     {
         [Key, Required]

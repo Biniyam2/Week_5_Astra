@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Entites
 {
+    [Table("UserRole")]
     public class UserRole
     {
         [ForeignKey("User"),Required,Key]

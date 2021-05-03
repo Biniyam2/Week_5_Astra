@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationCore.Models.Resquest.CastRequst
+namespace ApplicationCore.Models.Resquest.UserRoleRequest
 {
-    public class GetCatRequest
+    public class DeleteUserRoleRequest
     {
         public int Id { get; set; }
     }
