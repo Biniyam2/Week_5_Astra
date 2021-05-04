@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Infrastructure.Data;
+using Microsoft.OpenApi.Models;
 
 namespace MovieShopMVC
 {
@@ -32,9 +33,29 @@ namespace MovieShopMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "Bmes Api Core", Description = "It is a WEB Store (Back-end)", Version = "v1" });
+               
+            });
+            services.AddSession();
             services.AddDbContext<MovieShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieShowDB")));
             //************** Services **********************
-           // services.AddTransient<IM, MovieService>();
+            services.AddTransient<ICastService, CastService>();
+            services.AddTransient<ICrewService, CrewService>();
+            services.AddTransient<IFavoriteService, FavoriteService>();
+            services.AddTransient<IGenreService, GenreService>();
+            services.AddTransient<IMovieService, MovieService>();
+            services.AddTransient<IMovieCastService, MovieCastService>();
+            services.AddTransient<IMovieCrewService, MovieCrewService>();
+            services.AddTransient<IMovieGenreService, MovieGenreService>();
+            services.AddTransient<IPurchaseService, PurchaseService>();
+            services.AddTransient<IReviewService, ReviewService>();
+            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<ITrailerService, TrailerService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRoleService, UserRoleService>();
             //************** Repositorys ************************
             services.AddTransient<IRepository<Cast>, CastRepository>();
             services.AddTransient<IRepository<Crew>, CrewRepository>();
@@ -66,18 +87,24 @@ namespace MovieShopMVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Bmes Api Core");
+            });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseAuthentication();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
