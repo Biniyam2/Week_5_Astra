@@ -7,50 +7,28 @@ using Microsoft.EntityFrameworkCore;
 using ApplicationCore.Entites;
 using Infrastructure.Data;
 using ApplicationCore.RepsoitoryInterfaces;
+using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Repositories
 {
-    public class MovieRepository : IRepository<Movie>
+    public class MovieRepository : EfRepository<Movie> , IMovieRepository
     {
-        private readonly Data.MovieShopDbContext _movieDb;
-        public MovieRepository(MovieShopDbContext movieDb)
+        public MovieRepository(MovieShopDbContext dbContext): base(dbContext)
         {
-            _movieDb = movieDb;
+          
+        }
+        public async Task<IEnumerable<Movie>> GetTop30HighestRevenueMovies()
+        {
+            var movies = await _dbContext.Movies.OrderByDescending(m => m.Revenue).Take(30).ToListAsync();
+            return movies;
         }
 
-        public void Delete(Movie type)
-        {
-            _movieDb.Movies.Remove(type);
-            _movieDb.SaveChanges();
-        }
+        //public override async Task<Movie> GetByIdAsync(int id)
+        //{
+        //    var movie = await _dbContext.Movies.FirstOrDefaultAsync(m => m.Id == id);
+        //    return movie;
+        //}
 
-        public IEnumerable<Movie> GetAll()
-        {
-            var mov = _movieDb.Movies;
-            return mov;
-        }
 
-        public Movie GetById(int id)
-        {
-            var mov = _movieDb.Movies.Find(id);
-            return mov;
-        }
-
-        public void Insert(Movie type)
-        {
-            _movieDb.Movies.Add(type);
-            _movieDb.SaveChanges();
-        }
-
-        public void StoreProcedure(Movie item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Movie type)
-        {
-            _movieDb.Movies.Update(type);
-            _movieDb.SaveChanges();
-        }
     }
 }

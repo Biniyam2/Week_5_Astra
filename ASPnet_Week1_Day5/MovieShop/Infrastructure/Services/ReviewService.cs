@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Entites;
-using ApplicationCore.Models.Response.ReviewResponse;
-using ApplicationCore.Models.Resquest.ReviewRequest;
+using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
+using ApplicationCore.RepositoryInterfaces;
 using ApplicationCore.RepsoitoryInterfaces;
 using ApplicationCore.ServiceInterfaces;
 using System;
@@ -13,41 +14,41 @@ namespace Infrastructure.Services
 {
     public class ReviewService : IReviewService
     {
-        private readonly IRepository<Review> _repository;
-        public ReviewService(IRepository<Review> repository)
+        private readonly IReviewRepository _repository;
+        public ReviewService(IReviewRepository repository)
         {
             _repository = repository;
         }
-        public DeleteReviewResponse Delete(DeleteReviewRequest deleteReviewRequest)
-        {
-            var r = _repository.GetById(deleteReviewRequest.Id);
-            _repository.Delete(r);
-            return new DeleteReviewResponse();
-        }
+        //public DeleteReviewResponse Delete(DeleteReviewRequest deleteReviewRequest)
+        //{
+        //    var r = _repository.GetById(deleteReviewRequest.Id);
+        //    _repository.Delete(r);
+        //    return new DeleteReviewResponse();
+        //}
 
-        public GetReviewResponse GetReview(GetReviewRequest getReviewRequest)
-        {
-            GetReviewResponse getReviewResponse = new GetReviewResponse();
-            getReviewResponse.Review = _repository.GetById(getReviewRequest.Id);
-            return new GetReviewResponse();
-        }
+        //public GetReviewResponse GetReview(GetReviewRequest getReviewRequest)
+        //{
+        //    GetReviewResponse getReviewResponse = new GetReviewResponse();
+        //    getReviewResponse.Review = _repository.GetById(getReviewRequest.Id);
+        //    return new GetReviewResponse();
+        //}
 
-        public FetchReviewResponse GetReviews(FetchReviewRequest fetchReviewRequest)
-        {
-            throw new NotImplementedException();
-        }
+        //public FetchReviewResponse GetReviews(FetchReviewRequest fetchReviewRequest)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public CreateReviewResponse Insert(CreateReviewRequest createReviewRequest)
-        {
-            _repository.Insert(createReviewRequest.Review);
-            return new CreateReviewResponse();
-        }
+        //public CreateReviewResponse Insert(CreateReviewRequest createReviewRequest)
+        //{
+        //    _repository.Insert(createReviewRequest.Review);
+        //    return new CreateReviewResponse();
+        //}
 
-        public UpdateReviewResponse Update(UpdateReviewRequest updateReviewRequest)
-        {
-            var r = _repository.GetById(updateReviewRequest.Id);
-            _repository.Update(r);
-            return new UpdateReviewResponse();
-        }
+        //public UpdateReviewResponse Update(UpdateReviewRequest updateReviewRequest)
+        //{
+        //    var r = _repository.GetById(updateReviewRequest.Id);
+        //    _repository.Update(r);
+        //    return new UpdateReviewResponse();
+        //}
     }
 }

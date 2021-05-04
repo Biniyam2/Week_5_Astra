@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Models.Response.UserRoleResponse;
-using ApplicationCore.Models.Resquest.UserRoleRequest;
+﻿using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IUserRoleService
     {
-        public CreateUserRoleResponse Insert(CreateUserRoleRequest createMovieRequest);
-        public DeleteUserRoleResponse Delete(DeleteUserRoleRequest deleteMovieRequest);
-        public UpdateUserRoleResponse Update(UpdateUserRoleRequest updateMovieRequest);
-        public GetUserRoleResponse GetUserRole(GetUserRoleRequest getMovieRequest);
-        public FetchUserRoleResponse GetUserRoles(FetchUserRoleRequest fetchMovieRequest);
+        //public CreateUserRoleResponse Insert(CreateUserRoleRequest createMovieRequest);
+        //public DeleteUserRoleResponse Delete(DeleteUserRoleRequest deleteMovieRequest);
+        //public UpdateUserRoleResponse Update(UpdateUserRoleRequest updateMovieRequest);
+        //public GetUserRoleResponse GetUserRole(GetUserRoleRequest getMovieRequest);
+        //public FetchUserRoleResponse GetUserRoles(FetchUserRoleRequest fetchMovieRequest);
     }
 }

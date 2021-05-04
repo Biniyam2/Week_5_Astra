@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Models.Response.UserResponse;
-using ApplicationCore.Models.Resquest.UserRequest;
+﻿using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IUserService
     {
-        public CreateUserResponse Insert(CreateUserRequest createUserRequest);
-        public DeleteUserResponse Delete(DeleteUserRequest deleteUserRequest);
-        public UpdateUserResponse Update(UpdateUserRequest updateUserRequest);
-        public GetUserResponse GetUser(GetUserRequest getUserRequest);
-        public FetchUserResponse GetUsers(FetchUserRequest fetchUserRequest);
+        //public CreateUserResponse Insert(CreateUserRequest createUserRequest);
+        //public DeleteUserResponse Delete(DeleteUserRequest deleteUserRequest);
+        //public UpdateUserResponse Update(UpdateUserRequest updateUserRequest);
+        //public GetUserResponse GetUser(GetUserRequest getUserRequest);
+        //public FetchUserResponse GetUsers(FetchUserRequest fetchUserRequest);
     }
 }

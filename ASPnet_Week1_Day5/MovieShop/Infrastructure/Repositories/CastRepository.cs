@@ -7,50 +7,16 @@ using Microsoft.EntityFrameworkCore;
 using ApplicationCore.Entites;
 using Infrastructure.Data;
 using ApplicationCore.RepsoitoryInterfaces;
+using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Repositories
 {
-    public class CastRepository : IRepository<Cast>
+    public class CastRepository : EfRepository<Cast>, ICastRepository
     {
-        private readonly MovieShopDbContext _MovieDB;
-
-        public CastRepository(MovieShopDbContext movieDB)
+        public CastRepository(MovieShopDbContext dbContext) : base(dbContext)
         {
-            _MovieDB = movieDB;
+         
         }
-        public void Delete(Cast type)
-        {
-            _MovieDB.Casts.Remove(type);
-            _MovieDB.SaveChanges();
-        }
-
-        public IEnumerable<Cast> GetAll()
-        {
-            var cast = _MovieDB.Casts;
-            return cast;
-        }
-
-        public  Cast GetById(int id)
-        {
-            var cast = _MovieDB.Casts.Find(id);
-            return cast;
-        }
-
-        public void Insert(Cast type)
-        {
-            _MovieDB.Casts.Add(type);
-            _MovieDB.SaveChanges();
-        }
-
-        public void StoreProcedure(Cast item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Cast type)
-        {
-            _MovieDB.Casts.Update(type);
-            _MovieDB.SaveChanges();
-        }
+       
     }
 }

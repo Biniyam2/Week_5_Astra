@@ -25,5 +25,10 @@ namespace ApplicationCore.Entites
         public DateTime? LastLoginDateTime { get; set; }
         public byte? IsLocked { get; set; }
         public int? AccessFailedCount { get; set; }
+
+        public ICollection<Favorite> Favorites { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<Review> Reviews { get; set; }
     }
 }

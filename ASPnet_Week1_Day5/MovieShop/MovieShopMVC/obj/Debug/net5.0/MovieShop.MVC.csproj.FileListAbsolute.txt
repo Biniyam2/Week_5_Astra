@@ -176,7 +176,6 @@ C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\Movie
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\MovieShop.MVC.TagHelpers.input.cache
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\MovieShop.MVC.TagHelpers.output.cache
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\MovieShop.MVC.RazorCoreGenerate.cache
-C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Home\TopRatedMovies.cshtml.g.cs
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
@@ -271,3 +270,4 @@ C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\Movie
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\MovieShop.MVC.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs

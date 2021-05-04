@@ -7,49 +7,15 @@ using Microsoft.EntityFrameworkCore;
 using ApplicationCore.Entites;
 using Infrastructure.Data;
 using ApplicationCore.RepsoitoryInterfaces;
+using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Repositories
 {
-    public class GenreRepository : IRepository<Genre>
+    public class GenreRepository : EfRepository<Genre> ,IGenreRepository
     {
-        private readonly Data.MovieShopDbContext _movieDb;
-        public GenreRepository(MovieShopDbContext movieDb)
+        public GenreRepository(MovieShopDbContext dbContext) : base(dbContext)
         {
-            _movieDb = movieDb;
-        }
-        public void Delete(Genre type)
-        {
-            _movieDb.Genres.Remove(type);
-            _movieDb.SaveChanges();
-        }
 
-        public IEnumerable<Genre> GetAll()
-        {
-            var gen = _movieDb.Genres;
-            return gen;
-        }
-
-        public Genre GetById(int id)
-        {
-            var gen = _movieDb.Genres.Find(id);
-            return gen;
-        }
-
-        public void Insert(Genre type)
-        {
-            _movieDb.Genres.Add(type);
-            _movieDb.SaveChanges();
-        }
-
-        public void StoreProcedure(Genre item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Genre type)
-        {
-            _movieDb.Genres.Update(type);
-            _movieDb.SaveChanges();
         }
     }
 }

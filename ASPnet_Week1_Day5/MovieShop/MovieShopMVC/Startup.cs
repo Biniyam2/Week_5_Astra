@@ -17,6 +17,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Infrastructure.Data;
 using Microsoft.OpenApi.Models;
+using ApplicationCore.RepositoryInterfaces;
 
 namespace MovieShopMVC
 {
@@ -57,20 +58,20 @@ namespace MovieShopMVC
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRoleService, UserRoleService>();
             //************** Repositorys ************************
-            services.AddTransient<IRepository<Cast>, CastRepository>();
-            services.AddTransient<IRepository<Crew>, CrewRepository>();
-            services.AddTransient<IRepository<Favorite>, FavoriteRepository>();
-            services.AddTransient<IRepository<Genre>, GenreRepository>();
-            services.AddTransient<IRepository<Movie>, MovieRepository>();
-            services.AddTransient<IRepository<MovieCast>, MovieCastRepository>();
-            services.AddTransient<IRepository<MovieCrew>, MovieCrewRepository>();
-            services.AddTransient<IRepository<MovieGenre>, MovieGenreRepository>();
-            services.AddTransient<IRepository<Purchase>, PurchaseRepository>();
-            services.AddTransient<IRepository<Review>, ReviewReopsitoy>();
-            services.AddTransient<IRepository<Role>, RoleRepository>();
-            services.AddTransient<IRepository<Trailer>, TrailerRepository>();
-            services.AddTransient<IRepository<User>, UserRepository>();
-            services.AddTransient<IRepository<UserRole>, UserRoleRepository>();
+            services.AddTransient<ICastRepository, CastRepository>();
+            services.AddTransient<IMovieRepository, MovieRepository>();
+            services.AddTransient<ICrewRepository, CrewRepository>();
+            services.AddTransient<IFavoriteRepository, FavoriteRepository>();
+            services.AddTransient<IGenreRepository, GenreRepository>();
+            services.AddTransient<IMovieCastRepository, MovieCastRepository>();
+            services.AddTransient<IMovieCrewRepository, MovieCrewRepository>();
+            services.AddTransient<IMovieGenreRepository, MovieGenreRepository>();
+            services.AddTransient<IPurchaseRepository, PurchaseRepository>();
+            services.AddTransient<IReviewRepository, ReviewRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<ITrailerRepository, TrailerRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserRoleRepository, UserRoleRepository>();
             //****************************************************
         }
 
@@ -102,9 +103,9 @@ namespace MovieShopMVC
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

@@ -5,58 +5,55 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationCore.Models.Response;
 using ApplicationCore.RepsoitoryInterfaces;
-using ApplicationCore.Models.Response.MovieResponse;
-using ApplicationCore.Models.Resquest.MovieRequest;
+using ApplicationCore.Models.Request;
 using ApplicationCore.ServiceInterfaces;
 using ApplicationCore.Entites;
+using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Services
 {
     public class MovieService : IMovieService
     {
-        private readonly IRepository<Movie> _movieRepository;
-        public MovieService( IRepository<Movie> movieRepository)
+        private readonly IMovieRepository _movieRepository;
+
+        public MovieService(IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
-        public DeleteMovieResponse Delete(DeleteMovieRequest deleteGenreRequest)
-        {
-            
-            var movie = _movieRepository.GetById(deleteGenreRequest.Id);
-            _movieRepository.Delete(movie);
-            return new DeleteMovieResponse { Movie = movie };
-        }
 
-        public FetchMovieResponse GetMovies(FetchMovieRequest fetchGenreRequest)
+        public async Task<List<MovieResponse>> GetTop30RevenueMovie()
         {
-            var movies = _movieRepository.GetAll();
-            return new FetchMovieResponse()
+            var movies = await _movieRepository.GetTop30HighestRevenueMovies();
+
+            var topMovies = new List<MovieResponse>();
+            foreach (var movie in movies)
             {
-                Movie = movies
-            };
+                topMovies.Add(new MovieResponse
+                {
+                    Id = movie.Id,
+                    OverView = movie.OverView,
+                    Tagline = movie.Tagline,
+                    Revenue = movie.Revenue,
+                    ImdbUrl = movie.ImdbUrl,
+                    TmdbUrl = movie.TmdbUrl,
+                    PosterUrl = movie.PosterUrl,
+                    BackdropUrl = movie.BackdropUrl,
+                    OriginalLanguage = movie.OriginalLanguage,
+                    ReleaseDate = movie.ReleaseDate,
+                    RunTime = movie.RunTime,
+                    Price = movie.Price,
+                    CreateDate = movie.CreateDate,
+                    UpdateDate = movie.UpdateDate,
+                    CreateBy = movie.CreateBy,
+                    UpdateBy = movie.UpdateBy,
+                    Budget = movie.Budget,
+                    Title = movie.Title
+                }) ;
+            }
+
+            return topMovies;
         }
 
-        public GetMovieResponse GetMovie(GetMovieRequest getGenreRequest)
-        {
-            GetMovieResponse movieResponse = new GetMovieResponse();
-            movieResponse.Movie = _movieRepository.GetById(getGenreRequest.Id);
-            return movieResponse;
-       
-        }
-
-        public CreateMovieResponse Insert(CreateMovieRequest createMovieRequest)
-        {
-           
-            _movieRepository.Insert(createMovieRequest.Movie);
-            return new CreateMovieResponse();
-        }
-
-        public UpdateMovieResponse Update(UpdateMovieRequest updateGenreRequest)
-        {
-            var movie = _movieRepository.GetById(updateGenreRequest.Id);
-            _movieRepository.Update(updateGenreRequest.Movie);
-            return new UpdateMovieResponse { Movie = movie };
-        }
-      
+    
     }
 }

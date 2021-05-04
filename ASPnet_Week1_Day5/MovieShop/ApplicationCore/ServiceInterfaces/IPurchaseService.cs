@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Models.Response.PurchaseResponse;
-using ApplicationCore.Models.Resquest.PurchaseRequest;
+﻿using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IPurchaseService
     {
-        public CreatePurchaseResponse Insert(CreatePurchaseRequest createPurchaseRequest);
-        public DeletePurchaseResponse Delete(DeletePurchaseRequest deletePurchaseRequest);
-        public UpdatePurchaseResponse Update(UpdatePurchaseRequest updatePurchaseRequest);
-        public GetPurchaseResponse GetPurchase(GetPurchaseRequest getPurchaseRequest);
-        public FetchPurchaseResponse GetPurchases(FetchPurchaseRequest fetchPurchaseRequest);
+        //public CreatePurchaseResponse Insert(CreatePurchaseRequest createPurchaseRequest);
+        //public DeletePurchaseResponse Delete(DeletePurchaseRequest deletePurchaseRequest);
+        //public UpdatePurchaseResponse Update(UpdatePurchaseRequest updatePurchaseRequest);
+        //public GetPurchaseResponse GetPurchase(GetPurchaseRequest getPurchaseRequest);
+        //public FetchPurchaseResponse GetPurchases(FetchPurchaseRequest fetchPurchaseRequest);
     }
 }

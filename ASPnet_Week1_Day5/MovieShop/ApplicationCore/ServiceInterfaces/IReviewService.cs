@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Models.Response.ReviewResponse;
-using ApplicationCore.Models.Resquest.ReviewRequest;
+﻿using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IReviewService
     {
-        public CreateReviewResponse Insert(CreateReviewRequest createReviewRequest);
-        public DeleteReviewResponse Delete(DeleteReviewRequest deleteReviewRequest);
-        public UpdateReviewResponse Update(UpdateReviewRequest updateReviewRequest);
-        public GetReviewResponse GetReview(GetReviewRequest getReviewRequest);
-        public FetchReviewResponse GetReviews(FetchReviewRequest fetchReviewRequest);
+        //public CreateReviewResponse Insert(CreateReviewRequest createReviewRequest);
+        //public DeleteReviewResponse Delete(DeleteReviewRequest deleteReviewRequest);
+        //public UpdateReviewResponse Update(UpdateReviewRequest updateReviewRequest);
+        //public GetReviewResponse GetReview(GetReviewRequest getReviewRequest);
+        //public FetchReviewResponse GetReviews(FetchReviewRequest fetchReviewRequest);
     }
 }

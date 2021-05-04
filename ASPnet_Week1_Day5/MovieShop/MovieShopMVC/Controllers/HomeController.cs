@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApplicationCore.Entites;
+using ApplicationCore.Models.Response;
+using ApplicationCore.ServiceInterfaces;
+using Infrastructure.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,10 +13,17 @@ namespace MovieShop.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: HomeController
-        public IActionResult Index()
+        private readonly IMovieService _movieService;
+        public HomeController(IMovieService movieService)
         {
-            return View();
+            _movieService = movieService;
+        }
+        // GET: HomeController
+        public async Task<IActionResult> Index()
+        {
+            var movies = await _movieService.GetTop30RevenueMovie();
+            
+            return View(movies);
         }
 
         [HttpGet]

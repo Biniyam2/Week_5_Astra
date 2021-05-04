@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Models.Response.TrailerResponse;
-using ApplicationCore.Models.Resquest.TrailerRequest;
+﻿using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface ITrailerService
     {
-        public CreateTrailerResponse Insert(CreateTrailerRequest createTrailerRequest);
-        public DeleteTrailerResponse Delete(DeleteTrailerRequest deleteTrailerRequest);
-        public UpdateTrailerResponse Update(UpdateTrailerRequest updateTrailerRequest);
-        public GetTrailerResponse GetTrailer(GetTrailerRequest getTrailerRequest);
-        public FetchTrailerResponse GetTrailers(FetchTrailerRequest fetchTrailerRequest);
+        //public CreateTrailerResponse Insert(CreateTrailerRequest createTrailerRequest);
+        //public DeleteTrailerResponse Delete(DeleteTrailerRequest deleteTrailerRequest);
+        //public UpdateTrailerResponse Update(UpdateTrailerRequest updateTrailerRequest);
+        //public GetTrailerResponse GetTrailer(GetTrailerRequest getTrailerRequest);
+        //public FetchTrailerResponse GetTrailers(FetchTrailerRequest fetchTrailerRequest);
     }
 }

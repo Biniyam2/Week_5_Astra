@@ -7,50 +7,15 @@ using Microsoft.EntityFrameworkCore;
 using ApplicationCore.Entites;
 using Infrastructure.Data;
 using ApplicationCore.RepsoitoryInterfaces;
+using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Repositories
 {
-    public class FavoriteRepository : IRepository<Favorite>
+    public class FavoriteRepository : EfRepository<Favorite> , IFavoriteRepository
     {
-        private readonly Data.MovieShopDbContext _movieDb;
-        public FavoriteRepository(MovieShopDbContext movieDb)
+        public FavoriteRepository(MovieShopDbContext dbContext) : base(dbContext)
         {
-            _movieDb = movieDb;
-        }
 
-        public void Delete(Favorite type)
-        {
-            _movieDb.Favorites.Remove(type);
-            _movieDb.SaveChanges();
-        }
-
-        public IEnumerable<Favorite> GetAll()
-        {
-            var fav = _movieDb.Favorites;
-            return fav;
-        }
-
-        public Favorite GetById(int id)
-        {
-            var fav = _movieDb.Favorites.Find(id);
-            return fav;
-        }
-
-        public void Insert(Favorite type)
-        {
-            _movieDb.Favorites.Add(type);
-            _movieDb.SaveChanges();
-        }
-
-        public void StoreProcedure(Favorite item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Favorite type)
-        {
-            _movieDb.Favorites.Update(type);
-            _movieDb.SaveChanges();
         }
     }
 }

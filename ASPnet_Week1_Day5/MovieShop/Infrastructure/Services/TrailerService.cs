@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.Entites;
-using ApplicationCore.Models.Response.TrailerResponse;
-using ApplicationCore.Models.Resquest.TrailerRequest;
+using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
+using ApplicationCore.RepositoryInterfaces;
 using ApplicationCore.RepsoitoryInterfaces;
 using ApplicationCore.ServiceInterfaces;
 using System;
@@ -13,42 +14,42 @@ namespace Infrastructure.Services
 {
     public class TrailerService : ITrailerService
     {
-        private readonly IRepository<Trailer> _repository;
-        public TrailerService(IRepository<Trailer> repository)
+        private readonly ITrailerRepository _repository;
+        public TrailerService(ITrailerRepository repository)
         {
             _repository = repository;
         }
 
-        public DeleteTrailerResponse Delete(DeleteTrailerRequest deleteTrailerRequest)
-        {
-            var tr = _repository.GetById(deleteTrailerRequest.Id);
-            _repository.Delete(tr);
-            return new DeleteTrailerResponse();
-        }
+        //public DeleteTrailerResponse Delete(DeleteTrailerRequest deleteTrailerRequest)
+        //{
+        //    var tr = _repository.GetById(deleteTrailerRequest.Id);
+        //    _repository.Delete(tr);
+        //    return new DeleteTrailerResponse();
+        //}
 
-        public GetTrailerResponse GetTrailer(GetTrailerRequest getTrailerRequest)
-        {
-            GetTrailerResponse getTrailerResponse = new GetTrailerResponse();
-            getTrailerResponse.Trailer = _repository.GetById(getTrailerRequest.Id);
-            return new GetTrailerResponse();
-        }
+        //public GetTrailerResponse GetTrailer(GetTrailerRequest getTrailerRequest)
+        //{
+        //    GetTrailerResponse getTrailerResponse = new GetTrailerResponse();
+        //    getTrailerResponse.Trailer = _repository.GetById(getTrailerRequest.Id);
+        //    return new GetTrailerResponse();
+        //}
 
-        public FetchTrailerResponse GetTrailers(FetchTrailerRequest fetchTrailerRequest)
-        {
-            throw new NotImplementedException();
-        }
+        //public FetchTrailerResponse GetTrailers(FetchTrailerRequest fetchTrailerRequest)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public CreateTrailerResponse Insert(CreateTrailerRequest createTrailerRequest)
-        {
-            _repository.Insert(createTrailerRequest.Trailer);
-            return new CreateTrailerResponse();
-        }
+        //public CreateTrailerResponse Insert(CreateTrailerRequest createTrailerRequest)
+        //{
+        //    _repository.Insert(createTrailerRequest.Trailer);
+        //    return new CreateTrailerResponse();
+        //}
 
-        public UpdateTrailerResponse Update(UpdateTrailerRequest updateTrailerRequest)
-        {
-            var tr = _repository.GetById(updateTrailerRequest.Id);
-            _repository.Update(tr);
-            return new UpdateTrailerResponse();
-        }
+        //public UpdateTrailerResponse Update(UpdateTrailerRequest updateTrailerRequest)
+        //{
+        //    var tr = _repository.GetById(updateTrailerRequest.Id);
+        //    _repository.Update(tr);
+        //    return new UpdateTrailerResponse();
+        //}
     }
 }

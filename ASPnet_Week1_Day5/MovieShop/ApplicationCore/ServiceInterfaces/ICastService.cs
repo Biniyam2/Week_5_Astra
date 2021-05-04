@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Models.Response.CastResponse;
-using ApplicationCore.Models.Resquest.CastRequst;
+﻿using ApplicationCore.Models.Response;
+using ApplicationCore.Models.Request;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface ICastService
     {
-        public CreateCastResponse Insert(CreateCastRequest createCastRequest);
-        public DeleteCastResponse Delete(DeleteCastRequest deleteCrewRequest);
-        public UpdateCastResponse Update(UpdateCastRequest updateCrewRequest);
-        public GetCastResponse GetCast(GetCastRequest getCrewRequest);
-        public FetchCastResponse GetCasts(FetchCastRequest fetchCrewRequest);
+        //public CreateCastResponse Insert(CreateCastRequest createCastRequest);
+        //public DeleteCastResponse Delete(DeleteCastRequest deleteCrewRequest);
+        //public UpdateCastResponse Update(UpdateCastRequest updateCrewRequest);
+        //public GetCastResponse GetCast(GetCastRequest getCrewRequest);
+        //public FetchCastResponse GetCasts(FetchCastRequest fetchCrewRequest);
     }
 }

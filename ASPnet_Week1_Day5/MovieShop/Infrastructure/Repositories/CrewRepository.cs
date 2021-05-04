@@ -7,49 +7,15 @@ using Microsoft.EntityFrameworkCore;
 using ApplicationCore.Entites;
 using Infrastructure.Data;
 using ApplicationCore.RepsoitoryInterfaces;
+using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Repositories
 {
-    public class CrewRepository : IRepository<Crew>
+    public class CrewRepository : EfRepository<Crew>, ICrewRepository
     {
-        private readonly Data.MovieShopDbContext _movieDb;
-        public CrewRepository(Data.MovieShopDbContext movieDb)
+        public CrewRepository(MovieShopDbContext dbContext) : base(dbContext)
         {
-            _movieDb = movieDb;
-        }
-        public void Delete(Crew type)
-        {
-            _movieDb.Crews.Remove(type);
-            _movieDb.SaveChanges();
-        }
 
-        public IEnumerable<Crew> GetAll()
-        {
-            var crew = _movieDb.Crews;
-            return crew;
-        }
-
-        public Crew GetById(int id)
-        {
-            var crew = _movieDb.Crews.Find(id);
-            return crew;
-        }
-
-        public void Insert(Crew type)
-        {
-            _movieDb.Crews.Add(type);
-            _movieDb.SaveChanges();
-        }
-
-        public void StoreProcedure(Crew item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Crew type)
-        {
-            _movieDb.Crews.Update(type);
-            _movieDb.SaveChanges();
         }
     }
 }
