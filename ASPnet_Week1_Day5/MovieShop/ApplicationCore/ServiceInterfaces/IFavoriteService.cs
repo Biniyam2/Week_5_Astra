@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IFavoriteService
     {
-        //public CreateFavoriteResponse Insert(CreateFavoriteRequest createFavoriteRequest);
-        //public DeleteFavoriteResponse Delete(DeleteFavoriteRequest deleteFavoriteRequest);
-        //public UpdateFavoriteResponse Update(UpdateFavoriteRequest updateFavoriteRequest);
-        //public GetFavoriteResponse GetFavorite(GetFavoriteRequest getFavoriteRequest);
-        //public FetchFavoriteResponse GetFavorites(FetchFavoriteRequest fetchFavoriteRequest);
+        public Task<List<FavoriteResponse>> GetAllFavoritesAsync();
+        public Task<FavoriteResponse> GetFavoriteByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

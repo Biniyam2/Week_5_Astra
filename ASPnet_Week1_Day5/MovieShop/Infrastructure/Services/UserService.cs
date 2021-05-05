@@ -19,36 +19,119 @@ namespace Infrastructure.Services
         {
             _repository = repository;
         }
-        //public DeleteUserResponse Delete(DeleteUserRequest deleteUserRequest)
-        //{
-        //    var ur = _repository.GetById(deleteUserRequest.Id);
-        //    _repository.Delete(ur);
-        //    return new DeleteUserResponse();
-        //}
 
-        //public GetUserResponse GetUser(GetUserRequest getUserRequest)
-        //{
-        //    GetUserResponse getUserResponse = new GetUserResponse();
-        //    getUserResponse.User = _repository.GetById(getUserRequest.Id);
-        //    return new GetUserResponse();
-        //}
+        public async void AddAsync()
+        {
+            UserResponse userResponse = new UserResponse();
+            User user = new User() {
+            FirstName = userResponse.FirstName,
+            LastName = userResponse.LastName,
+            DateOfBirth = userResponse.DateOfBirth,
+            Email = userResponse.Email,
+            HashedPassword = userResponse.HashedPassword,
+            Salt = userResponse.Salt,
+            PhoneNumber = userResponse.PhoneNumber,
+            TwoFactorEnabled = userResponse.TwoFactorEnabled,
+            LastLoginDateTime = userResponse.LastLoginDateTime,
+            LockoutEndDate = userResponse.LockoutEndDate,
+            IsLocked = userResponse.IsLocked,
+            AccessFailedCount = userResponse.AccessFailedCount
 
-        //public FetchUserResponse GetUsers(FetchUserRequest fetchUserRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            };
+            await _repository.AddAsync(user);
+        }
 
-        //public CreateUserResponse Insert(CreateUserRequest createUserRequest)
-        //{
-        //    _repository.Insert(createUserRequest.User);
-        //    return new CreateUserResponse();
-        //}
+        public async void DeleteAsync()
+        {
+            UserResponse userResponse = new UserResponse();
+            User user = new User()
+            {
+                FirstName = userResponse.FirstName,
+                LastName = userResponse.LastName,
+                DateOfBirth = userResponse.DateOfBirth,
+                Email = userResponse.Email,
+                HashedPassword = userResponse.HashedPassword,
+                Salt = userResponse.Salt,
+                PhoneNumber = userResponse.PhoneNumber,
+                TwoFactorEnabled = userResponse.TwoFactorEnabled,
+                LastLoginDateTime = userResponse.LastLoginDateTime,
+                LockoutEndDate = userResponse.LockoutEndDate,
+                IsLocked = userResponse.IsLocked,
+                AccessFailedCount = userResponse.AccessFailedCount
 
-        //public UpdateUserResponse Update(UpdateUserRequest updateUserRequest)
-        //{
-        //    var ur = _repository.GetById(updateUserRequest.Id);
-        //    _repository.Update(ur);
-        //    return new UpdateUserResponse();
-        //}
+            };
+            await _repository.DeleteAsync(user);
+        }
+
+        public async Task<List<UserResponse>> GetAllUsersAsync()
+        {
+            var user =await _repository.ListAllAsync();
+            List<UserResponse> userResponses = new List<UserResponse>();
+            foreach (var item in user)
+            {
+                userResponses.Add(new UserResponse {
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    DateOfBirth = item.DateOfBirth,
+                    Email = item.Email,
+                    HashedPassword = item.HashedPassword,
+                    Salt = item.Salt,
+                    PhoneNumber = item.PhoneNumber,
+                    TwoFactorEnabled = item.TwoFactorEnabled,
+                    LastLoginDateTime = item.LastLoginDateTime,
+                    LockoutEndDate = item.LockoutEndDate,
+                    IsLocked = item.IsLocked,
+                    AccessFailedCount = item.AccessFailedCount
+                });
+              
+            }
+            return userResponses;
+        }
+
+        public async Task<UserResponse> GetUserByIdAsync(int id)
+        {
+            var user = await _repository.GetByIdAsync(id);
+            UserResponse userResponses = new UserResponse() {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                DateOfBirth = user.DateOfBirth,
+                Email = user.Email,
+                HashedPassword = user.HashedPassword,
+                Salt = user.Salt,
+                PhoneNumber = user.PhoneNumber,
+                TwoFactorEnabled = user.TwoFactorEnabled,
+                LastLoginDateTime = user.LastLoginDateTime,
+                LockoutEndDate = user.LockoutEndDate,
+                IsLocked = user.IsLocked,
+                AccessFailedCount = user.AccessFailedCount,
+                Purchases = (ICollection<Purchase>)user.Purchases.Where(u => u.UserId == user.Id).Select(u => u.Movie),
+                Favorites = (ICollection<Favorite>)user.Favorites.Where(u => u.UserId == user.Id).Select(u => u.Movie),
+                UserRoles = (ICollection<UserRole>)user.UserRoles.Where(u => u.UserId == user.Id).Select(u => u.Role),
+                Reviews = (ICollection<Review>)user.Reviews.Where(u => u.UserId == user.Id).Select(u => u.Rating)
+            };
+            return userResponses;
+        }
+
+        public async void UpdateAsync()
+        {
+            UserResponse userResponse = new UserResponse();
+            User user = new User()
+            {
+                FirstName = userResponse.FirstName,
+                LastName = userResponse.LastName,
+                DateOfBirth = userResponse.DateOfBirth,
+                Email = userResponse.Email,
+                HashedPassword = userResponse.HashedPassword,
+                Salt = userResponse.Salt,
+                PhoneNumber = userResponse.PhoneNumber,
+                TwoFactorEnabled = userResponse.TwoFactorEnabled,
+                LastLoginDateTime = userResponse.LastLoginDateTime,
+                LockoutEndDate = userResponse.LockoutEndDate,
+                IsLocked = userResponse.IsLocked,
+                AccessFailedCount = userResponse.AccessFailedCount
+
+            };
+            await _repository.UpdateAsync(user);
+        }
     }
 }

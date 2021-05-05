@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IMovieCrewService
     {
-        //public CreateMovieCrewResponse Insert(CreateMovieCrewRequest createGenreRequest);
-        //public DeleteMovieCrewResponse Delete(DeleteMovieCrewRequest deleteGenreRequest);
-        //public UpdateMovieCrewResponse Update(UpdateMovieCrewRequest updateGenreRequest);
-        //public GetMovieCrewResponse GetMovieCrew(GetMovieCrewRequest getGenreRequest);
-        //public FetchMovieCrewResponse GetMovieCrews(FetchMovieCrewRequest fetchGenreRequest);
+        public Task<List<MovieCrewResponse>> GetAllMovieCrewsAsync();
+        public Task<MovieCrewResponse> GetMovieCrewByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

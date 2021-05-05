@@ -20,37 +20,66 @@ namespace Infrastructure.Services
         {
             _repository = repository;
         }
-        //public DeleteFavoriteResponse Delete(DeleteFavoriteRequest deleteFavoriteRequest)
-        //{
-        //   var favorite = _repository.GetById(deleteFavoriteRequest.Id);
-        //    _repository.Delete(favorite);
-        //    return new DeleteFavoriteResponse();
-        //}
 
-        //public GetFavoriteResponse GetFavorite(GetFavoriteRequest getFavoriteRequest)
-        //{
-        //    GetFavoriteResponse getFavorite = new GetFavoriteResponse();
-        //    getFavorite.Favorite = _repository.GetById(getFavoriteRequest.Id);
-        //    return new GetFavoriteResponse();
+        public async void AddAsync()
+        {
+           FavoriteRequest favoriteRequest = new FavoriteRequest();
+            Favorite favorite = new Favorite() { 
+              MovieId = favoriteRequest.MovieId,
+              UserId = favoriteRequest.UserId
+            };
+           await _repository.AddAsync(favorite);
 
-        //}
+        }
 
-        //public FetchFavoriteResponse GetFavorites(FetchFavoriteRequest fetchFavoriteRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async void DeleteAsync()
+        {
+            FavoriteRequest favoriteRequest = new FavoriteRequest();
+            Favorite favorite = new Favorite()
+            {
+                MovieId = favoriteRequest.MovieId,
+                UserId = favoriteRequest.UserId
+            };
+            await _repository.DeleteAsync(favorite);
+        }
 
-        //public CreateFavoriteResponse Insert(CreateFavoriteRequest createFavoriteRequest)
-        //{
-        //    _repository.Insert(createFavoriteRequest.Favorite);
-        //    return new CreateFavoriteResponse();
-        //}
+        public async Task<List<FavoriteResponse>> GetAllFavoritesAsync()
+        {
+            var favs =await _repository.ListAllAsync();
+            List<FavoriteResponse> favoriteResponses = new List<FavoriteResponse>();
+            foreach (var item in favs)
+            {
+                favoriteResponses.Add(
+                    new FavoriteResponse()
+                    {
+                        Id = item.Id,
+                        UserId = item.UserId,
+                        MovieId = item.MovieId
+                    } );
+            }
+            return favoriteResponses;
+        }
 
-        //public UpdateFavoriteResponse Update(UpdateFavoriteRequest updateFavoriteRequest)
-        //{
-        //   var fav = _repository.GetById(updateFavoriteRequest.Id);
-        //    _repository.Update(fav);
-        //    return new UpdateFavoriteResponse();
-        //}
+        public async Task<FavoriteResponse> GetFavoriteByIdAsync(int id)
+        {
+            var fav = await _repository.GetByIdAsync(id);
+            FavoriteResponse favoriteResponse = new FavoriteResponse() {
+                Id = fav.Id,
+                UserId = fav.UserId,
+                MovieId = fav.MovieId
+            };
+            return favoriteResponse;
+        }
+
+        public async void UpdateAsync()
+        {
+            FavoriteRequest favoriteRequest = new FavoriteRequest();
+            Favorite favorite = new Favorite()
+            {
+                MovieId = favoriteRequest.MovieId,
+                UserId = favoriteRequest.UserId
+            };
+            await _repository.UpdateAsync(favorite);
+        }
     }
 }

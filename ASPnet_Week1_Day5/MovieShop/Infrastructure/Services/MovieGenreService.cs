@@ -21,36 +21,64 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        //public DeleteMovieGenreResponse Delete(DeleteMovieGenreRequest deleteGenreRequest)
-        //{
-        //    var mg = _repository.GetById(deleteGenreRequest.Id);
-        //    _repository.Delete(mg);
-        //    return new DeleteMovieGenreResponse();
-        //}
+        public async void AddAsync()
+        {
+            MovieGenreRequest moviegenreRequest = new MovieGenreRequest();
 
-        //public GetMovieGenreResponse GetMovieGenre(GetMovieGenreRequest getGenreRequest)
-        //{
-        //    GetMovieGenreResponse getMovieGenreResponse = new GetMovieGenreResponse();
-        //    getMovieGenreResponse.MovieGenre = _repository.GetById(getGenreRequest.Id);
-        //    return new GetMovieGenreResponse();
-        //}
+            MovieGenre movieGenre = new MovieGenre()
+            {
+                MovieId = moviegenreRequest.MovieId,
+                GenreId = moviegenreRequest.GenreId
+            };
+            await _repository.AddAsync(movieGenre);
+        }
 
-        //public FetchMovieGenreResponse GetMovieGenres(FetchMovieGenreRequest fetchGenreRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async void DeleteAsync()
+        {
+            MovieGenreRequest moviegenreRequest = new MovieGenreRequest();
 
-        //public CreateMovieGenreResponse Insert(CreateMovieGenreRequest createGenreRequest)
-        //{
-        //    _repository.Insert(createGenreRequest.MovieGenre);
-        //    return new CreateMovieGenreResponse();
-        //}
+            MovieGenre movieGenre = new MovieGenre()
+            {
+                MovieId = moviegenreRequest.MovieId,
+                GenreId = moviegenreRequest.GenreId
+            };
+            await _repository.DeleteAsync(movieGenre);
+        }
 
-        //public UpdateMovieGenreResponse Update(UpdateMovieGenreRequest updateGenreRequest)
-        //{
-        //    var mg = _repository.GetById(updateGenreRequest.Id);
-        //    _repository.Update(mg);
-        //    return new UpdateMovieGenreResponse();
-        //}
+        public async Task<List<MovieGenreResponse>> GetAllMovieGenresAsync()
+        {
+            var mg = await _repository.ListAllAsync();
+            List<MovieGenreResponse> movieGenres = new List<MovieGenreResponse>();
+            foreach (var item in mg)
+            {
+                movieGenres.Add( new MovieGenreResponse { 
+                MovieId = item.MovieId,
+                GenreId = item.GenreId
+                });
+            }
+            return movieGenres;
+        }
+
+        public async Task<MovieGenreResponse> GetMovieGenreByIdAsync(int id)
+        {
+            var mg = await _repository.GetByIdAsync(id);
+            MovieGenreResponse movieGenreResponse = new MovieGenreResponse() { 
+            MovieId = mg.MovieId,
+            GenreId = mg.GenreId
+            };
+            return movieGenreResponse;
+        }
+
+        public async void UpdateAsync()
+        {
+            MovieGenreRequest moviegenreRequest = new MovieGenreRequest();
+
+            MovieGenre movieGenre = new MovieGenre()
+            {
+                MovieId = moviegenreRequest.MovieId,
+                GenreId = moviegenreRequest.GenreId
+            };
+            await _repository.UpdateAsync(movieGenre);
+        }
     }
 }

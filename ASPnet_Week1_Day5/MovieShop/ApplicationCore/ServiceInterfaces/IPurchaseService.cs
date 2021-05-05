@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IPurchaseService
     {
-        //public CreatePurchaseResponse Insert(CreatePurchaseRequest createPurchaseRequest);
-        //public DeletePurchaseResponse Delete(DeletePurchaseRequest deletePurchaseRequest);
-        //public UpdatePurchaseResponse Update(UpdatePurchaseRequest updatePurchaseRequest);
-        //public GetPurchaseResponse GetPurchase(GetPurchaseRequest getPurchaseRequest);
-        //public FetchPurchaseResponse GetPurchases(FetchPurchaseRequest fetchPurchaseRequest);
+        public Task<List<PurchaseResponse>> GetAllPurchasesAsync();
+        public Task<PurchaseResponse> GetPurchaseByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

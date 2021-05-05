@@ -22,7 +22,7 @@ namespace Infrastructure.Services
             _castRepository = castRepository;
         }
 
-        public void Add()
+        public async void AddAsync()
         {
             CastRequest castRequest = new CastRequest();
             Cast cast = new Cast() { 
@@ -31,11 +31,10 @@ namespace Infrastructure.Services
                   TmdbUrl = castRequest.TmdbUrl,
                   ProfilePath = castRequest.ProfilePath
             };
-            _castRepository.AddAsync(cast);
+          await  _castRepository.AddAsync(cast);
 
         }
-
-        public void Delete()
+        public async void UpdateAsync()
         {
             CastRequest castRequest = new CastRequest();
             Cast cast = new Cast()
@@ -45,10 +44,21 @@ namespace Infrastructure.Services
                 TmdbUrl = castRequest.TmdbUrl,
                 ProfilePath = castRequest.ProfilePath
             };
-            _castRepository.DeleteAsync(cast);
+            await _castRepository.UpdateAsync(cast);
         }
-
-        public async Task<List<CastResponse>> GetAllCasts()
+        public async void DeleteAsync()
+        {
+            CastRequest castRequest = new CastRequest();
+            Cast cast = new Cast()
+            {
+                Gender = castRequest.Gender,
+                Name = castRequest.Name,
+                TmdbUrl = castRequest.TmdbUrl,
+                ProfilePath = castRequest.ProfilePath
+            };
+           await _castRepository.DeleteAsync(cast);
+        }
+        public async Task<List<CastResponse>> GetAllCastsAsync()
         {
             var cast = await _castRepository.ListAllAsync();
             
@@ -67,8 +77,7 @@ namespace Infrastructure.Services
             }
             return castResponses;
         }
-
-        public async Task<CastResponse> GetCastById(int id)
+        public async Task<CastResponse> GetCastByIdAsync(int id)
         {
             var cast =await _castRepository.GetByIdAsync(id);
             CastResponse castResponse = new CastResponse() {
@@ -81,18 +90,5 @@ namespace Infrastructure.Services
             };
             return castResponse;
         }
-
-        public async void Update()
-        {
-            CastRequest castRequest = new CastRequest();
-            Cast cast = new Cast() {
-                Gender = castRequest.Gender,
-                Name = castRequest.Name,
-                TmdbUrl = castRequest.TmdbUrl,
-                ProfilePath = castRequest.ProfilePath
-            };
-            await _castRepository.UpdateAsync(cast);
-        }
-        
     }
 }

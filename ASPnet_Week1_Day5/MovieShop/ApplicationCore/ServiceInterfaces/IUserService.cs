@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IUserService
     {
-        //public CreateUserResponse Insert(CreateUserRequest createUserRequest);
-        //public DeleteUserResponse Delete(DeleteUserRequest deleteUserRequest);
-        //public UpdateUserResponse Update(UpdateUserRequest updateUserRequest);
-        //public GetUserResponse GetUser(GetUserRequest getUserRequest);
-        //public FetchUserResponse GetUsers(FetchUserRequest fetchUserRequest);
+        public Task<List<UserResponse>> GetAllUsersAsync();
+        public Task<UserResponse> GetUserByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

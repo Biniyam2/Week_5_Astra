@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IRoleService
     {
-        //public CreateRoleResponse Insert(CreateRoleRequest createRoleRequest);
-        //public DeleteRoleResponse Delete(DeleteRoleRequest deleteRoleRequest);
-        //public UpdateRoleResponse Update(UpdateRoleRequest updateRoleRequest);
-        //public GetRoleResponse GetRole(GetRoleRequest getRoleRequest);
-        //public FetchRoleResponse GetRoles(FetchRoleRequest fetchRoleRequest);
+        public Task<List<RoleResponse>> GetAllRolesAsync();
+        public Task<RoleResponse> GetRoleByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

@@ -19,36 +19,71 @@ namespace Infrastructure.Services
         {
             _repository = repository;
         }
-        //public DeleteReviewResponse Delete(DeleteReviewRequest deleteReviewRequest)
-        //{
-        //    var r = _repository.GetById(deleteReviewRequest.Id);
-        //    _repository.Delete(r);
-        //    return new DeleteReviewResponse();
-        //}
 
-        //public GetReviewResponse GetReview(GetReviewRequest getReviewRequest)
-        //{
-        //    GetReviewResponse getReviewResponse = new GetReviewResponse();
-        //    getReviewResponse.Review = _repository.GetById(getReviewRequest.Id);
-        //    return new GetReviewResponse();
-        //}
+        public async void AddAsync()
+        {
+            var rev = new ReviewRequest();
+            Review review = new Review() {
+            MovieId = rev.MovieId,
+            UserId = rev.UserId,
+            Rating = rev.Rating,
+            ReviewText = rev.ReviewText
+            };
+            await _repository.AddAsync(review);
+        }
 
-        //public FetchReviewResponse GetReviews(FetchReviewRequest fetchReviewRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async void DeleteAsync()
+        {
+            var rev = new ReviewRequest();
+            Review review = new Review()
+            {
+                MovieId = rev.MovieId,
+                UserId = rev.UserId,
+                Rating = rev.Rating,
+                ReviewText = rev.ReviewText
+            };
+            await _repository.DeleteAsync(review);
+        }
 
-        //public CreateReviewResponse Insert(CreateReviewRequest createReviewRequest)
-        //{
-        //    _repository.Insert(createReviewRequest.Review);
-        //    return new CreateReviewResponse();
-        //}
+        public async Task<List<ReviewResponse>> GetAllReviewsAsync()
+        {
+            var rev =await _repository.ListAllAsync();
+            List<ReviewResponse> reviewResponses = new List<ReviewResponse>();
+            foreach (var item in rev)
+            {
+                reviewResponses.Add(new ReviewResponse {
+                    MovieId = item.MovieId,
+                    UserId = item.UserId,
+                    Rating = item.Rating,
+                    ReviewText = item.ReviewText
+                });
+            }
+            return reviewResponses;
+        }
 
-        //public UpdateReviewResponse Update(UpdateReviewRequest updateReviewRequest)
-        //{
-        //    var r = _repository.GetById(updateReviewRequest.Id);
-        //    _repository.Update(r);
-        //    return new UpdateReviewResponse();
-        //}
+        public async Task<ReviewResponse> GetReviewByIdAsync(int id)
+        {
+            var rev = await _repository.GetByIdAsync(id);
+            ReviewResponse reviewResponse = new ReviewResponse() {
+                MovieId = rev.MovieId,
+                UserId = rev.UserId,
+                Rating = rev.Rating,
+                ReviewText = rev.ReviewText
+            };
+            return reviewResponse;
+        }
+
+        public async void UpdateAsync()
+        {
+            var rev = new ReviewRequest();
+            Review review = new Review()
+            {
+                MovieId = rev.MovieId,
+                UserId = rev.UserId,
+                Rating = rev.Rating,
+                ReviewText = rev.ReviewText
+            };
+            await _repository.UpdateAsync(review);
+        }
     }
 }

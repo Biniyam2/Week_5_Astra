@@ -19,36 +19,56 @@ namespace Infrastructure.Services
         {
             _repository = repository;
         }
-        //public DeleteRoleResponse Delete(DeleteRoleRequest deleteRoleRequest)
-        //{
-        //    var role = _repository.GetById(deleteRoleRequest.Id);
-        //    _repository.Delete(role);
-        //    return new DeleteRoleResponse();
-        //}
 
-        //public GetRoleResponse GetRole(GetRoleRequest getRoleRequest)
-        //{
-        //    GetRoleResponse getRoleResponse = new GetRoleResponse();
-        //    getRoleResponse.Role = _repository.GetById(getRoleRequest.Id);
-        //    return new GetRoleResponse();
-        //}
+        public async void AddAsync()
+        {
+            RoleRequest roleRequest = new RoleRequest();
+            Role role = new Role() {
+             Name = roleRequest.Name
+            };
+            await _repository.AddAsync(role);
+        }
 
-        //public FetchRoleResponse GetRoles(FetchRoleRequest fetchRoleRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async void DeleteAsync()
+        {
+            RoleRequest roleRequest = new RoleRequest();
+            Role role = new Role()
+            {
+                Name = roleRequest.Name
+            };
+            await _repository.DeleteAsync(role);
+        }
 
-        //public CreateRoleResponse Insert(CreateRoleRequest createRoleRequest)
-        //{
-        //    _repository.Insert(createRoleRequest.Role);
-        //    return new CreateRoleResponse();
-        //}
+        public async Task<List<RoleResponse>> GetAllRolesAsync()
+        {
+            var role = await _repository.ListAllAsync();
+            List<RoleResponse> roleResponses = new List<RoleResponse>();
+            foreach (var item in role)
+            {
+                roleResponses.Add(new RoleResponse { Id = item.Id, Name = item.Name});
+            }
+            return roleResponses;
+        }
 
-        //public UpdateRoleResponse Update(UpdateRoleRequest updateRoleRequest)
-        //{
-        //    var role = _repository.GetById(updateRoleRequest.Id);
-        //    _repository.Update(role);
-        //    return new UpdateRoleResponse();
-        //}
+        public async Task<RoleResponse> GetRoleByIdAsync(int id)
+        {
+            var role =await _repository.GetByIdAsync(id);
+            RoleResponse roleResponse = new RoleResponse() {
+                Id = role.Id,
+                Name = role.Name,
+                UserRoles = (ICollection<UserRole>)role.UserRoles.Where(mc => mc.RoleId == role.Id).Select(r => r.User)
+            };
+            return roleResponse;
+        }
+
+        public async void UpdateAsync()
+        {
+            RoleRequest roleRequest = new RoleRequest();
+            Role role = new Role()
+            {
+                Name = roleRequest.Name
+            };
+            await _repository.DeleteAsync(role);
+        }
     }
 }

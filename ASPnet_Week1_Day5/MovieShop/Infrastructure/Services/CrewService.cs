@@ -20,37 +20,75 @@ namespace Infrastructure.Services
         {
             _crewRepsoitory = crewRepsoitory;
         }
-        //public DeleteCrewResponse Delete(DeleteCrewRequest deleteCrewRequest)
-        //{
-        //    var crew  = _crewRepsoitory.GetById(deleteCrewRequest.Id);
-        //    _crewRepsoitory.Delete(crew);
-        //    return new DeleteCrewResponse();
-        //}
 
-        //public GetCrewResponse GetCrew(GetCrewRequest getCrewRequest)
-        //{
-        //    GetCrewResponse getCrew = new GetCrewResponse();
-        //   getCrew.Crew = _crewRepsoitory.GetById(getCrewRequest.Id);
-        //    return new GetCrewResponse();
-        //}
+        public async void AddAsync()
+        {
+            CrewRequest crewRequest = new CrewRequest();
+            Crew crew = new Crew() { 
+               Name = crewRequest.Name,
+               Gender = crewRequest.Gender,
+               TmdbUrl = crewRequest.TmdbUrl,
+               ProfilePath = crewRequest.ProfilePath
+            };
+           await _crewRepsoitory.AddAsync(crew);
+        }
 
-        //public FetchCrewResponse GetCrews(FetchCrewRequest fetchCrewRequest)
-        //{
+        public async void DeleteAsync()
+        {
+            CrewRequest crewRequest = new CrewRequest();
+            Crew crew = new Crew()
+            {
+                Name = crewRequest.Name,
+                Gender = crewRequest.Gender,
+                TmdbUrl = crewRequest.TmdbUrl,
+                ProfilePath = crewRequest.ProfilePath
+            };
+            await _crewRepsoitory.DeleteAsync(crew);
+        }
 
-        //    throw new NotImplementedException();
-        //}
+        public async Task<List<CrewResponse>> GetAllCrewsAsync()
+        {
+            var casts = await _crewRepsoitory.ListAllAsync();
+            List<CrewResponse> crewResponses = new List<CrewResponse>();
 
-        //public CreateCrewResponse Insert(CreateCrewRequest createCrewRequest)
-        //{
-        //    _crewRepsoitory.Insert(createCrewRequest.Crew);
-        //    return new CreateCrewResponse();
-        //}
+            foreach (var item in casts)
+            {
+                crewResponses.Add(new CrewResponse {
+                    Name = item.Name,
+                    Gender = item.Gender,
+                    TmdbUrl = item.TmdbUrl,
+                    ProfilePath = item.ProfilePath
+                });
+            }
+            return crewResponses;
+        }
 
-        //public UpdateCrewResponse Update(UpdateCrewRequest updateCrewRequest)
-        //{
-        //    var crew = _crewRepsoitory.GetById(updateCrewRequest.Id);
-        //    _crewRepsoitory.Update(crew);
-        //    return new UpdateCrewResponse();
-        //}
+        public async Task<CrewResponse> GetCrewByIdAsync(int id)
+        {
+            var cast = await _crewRepsoitory.GetByIdAsync(id);
+            CrewResponse castResponse = new CrewResponse() {
+
+                Name = cast.Name,
+                Gender = cast.Gender,
+                TmdbUrl = cast.TmdbUrl,
+                ProfilePath = cast.ProfilePath,
+                MovieCrews = (ICollection<MovieCrew>)cast.MovieCrews.Where(mc => mc.CrewId == cast.Id).Select(mc => mc.Movie)
+            };
+            return castResponse;
+        }
+
+        public async void UpdateAsync()
+        {
+            CrewRequest crewRequest = new CrewRequest();
+            Crew crew = new Crew()
+            {
+                Name = crewRequest.Name,
+                Gender = crewRequest.Gender,
+                TmdbUrl = crewRequest.TmdbUrl,
+                ProfilePath = crewRequest.ProfilePath
+            };
+            await _crewRepsoitory.UpdateAsync(crew);
+        }
+      
     }
 }

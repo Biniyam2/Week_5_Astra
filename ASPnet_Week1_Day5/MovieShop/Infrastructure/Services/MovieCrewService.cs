@@ -20,38 +20,73 @@ namespace Infrastructure.Services
         {
             _repository = repository;
         }
-        //public CreateMovieCrewResponse Insert(CreateMovieCrewRequest createGenreRequest)
-        //{
-        //    _repository.Insert(createGenreRequest.MovieCrew);
-        //    return new CreateMovieCrewResponse();
-        //}
 
-        //public DeleteMovieCrewResponse Delete(DeleteMovieCrewRequest deleteGenreRequest)
-        //{
-        //   var mcrew = _repository.GetById(deleteGenreRequest.Id);
-        //    _repository.Delete(mcrew);
-        //    return new DeleteMovieCrewResponse();
-        //}
+        public async void AddAsync()
+        {
+            MovieCrewRequest movieCrewRequest = new MovieCrewRequest();
+            MovieCrew movieCrew = new MovieCrew() { 
+            CrewId = movieCrewRequest.CrewId,
+            MovieId = movieCrewRequest.MovieId,
+            Department = movieCrewRequest.Department,
+            Job = movieCrewRequest.Job
+            };
+            await _repository.AddAsync(movieCrew);
+        }
 
-        //public UpdateMovieCrewResponse Update(UpdateMovieCrewRequest updateGenreRequest)
-        //{
-        //    var mcrew = _repository.GetById(updateGenreRequest.Id);
-        //    _repository.Update(mcrew);
-        //    return new UpdateMovieCrewResponse();
-        //}
+        public async void DeleteAsync()
+        {
+            MovieCrewRequest movieCrewRequest = new MovieCrewRequest();
+            MovieCrew movieCrew = new MovieCrew()
+            {
+                CrewId = movieCrewRequest.CrewId,
+                MovieId = movieCrewRequest.MovieId,
+                Department = movieCrewRequest.Department,
+                Job = movieCrewRequest.Job
+            };
+            await _repository.DeleteAsync(movieCrew);
+        }
 
-        //public GetMovieCrewResponse GetMovieCrew(GetMovieCrewRequest getGenreRequest)
-        //{
-        //    GetMovieCrewResponse getMovieCrew = new GetMovieCrewResponse();
-        //    getMovieCrew.MovieCrew = _repository.GetById(getGenreRequest.Id);
-        //    return new GetMovieCrewResponse();
-        //}
+        public async Task<List<MovieCrewResponse>> GetAllMovieCrewsAsync()
+        {
+            var mc =await _repository.ListAllAsync();
+            List<MovieCrewResponse> movieCrewResponses = new List<MovieCrewResponse>();
+            foreach (var item in mc)
+            {
+                movieCrewResponses.Add( new MovieCrewResponse { 
+                
+                MovieId = item.MovieId,
+                CrewId = item.CrewId,
+                Department = item.Department,
+                Job = item.Job
+                });
+            }
+            return movieCrewResponses;
+        }
 
-        //public FetchMovieCrewResponse GetMovieCrews(FetchMovieCrewRequest fetchGenreRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<MovieCrewResponse> GetMovieCrewByIdAsync(int id)
+        {
+            var mc =await _repository.GetByIdAsync(id);
+            MovieCrewResponse movieCrewResponse = new MovieCrewResponse() {
+                MovieId = mc.MovieId,
+                CrewId = mc.CrewId,
+                Department = mc.Department,
+                Job = mc.Job
+            };
+            return movieCrewResponse;
+        }
 
-       
+        public async void UpdateAsync()
+        {
+            MovieCrewRequest movieCrewRequest = new MovieCrewRequest();
+            MovieCrew movieCrew = new MovieCrew()
+            {
+                CrewId = movieCrewRequest.CrewId,
+                MovieId = movieCrewRequest.MovieId,
+                Department = movieCrewRequest.Department,
+                Job = movieCrewRequest.Job
+            };
+            await _repository.UpdateAsync(movieCrew);
+        }
+        
     }
 }

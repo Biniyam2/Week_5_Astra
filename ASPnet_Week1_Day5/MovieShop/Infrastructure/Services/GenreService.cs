@@ -19,36 +19,48 @@ namespace Infrastructure.Services
         {
             _genreRepository = genreRepository;
         }
-        //public DeleteGenreResponse Delete(DeleteGenreRequest deleteGenreRequest)
-        //{
-        //    var gen = _genreRepository.GetById(deleteGenreRequest.Id);
-        //    _genreRepository.Delete(gen);
-        //    return new DeleteGenreResponse();
-        //}
 
-        //public GetGenreResponse GetGenre(GetGenreRequest getGenreRequest)
-        //{
-        //    GetGenreResponse getGenreResponse = new GetGenreResponse();
-        //       getGenreResponse.Genre =  _genreRepository.GetById(getGenreRequest.Id);
-        //    return new GetGenreResponse();
-        //}
+        public async void AddAsync()
+        {
+            GenreRequest genreRequest = new GenreRequest();
 
-        //public FetchGenreResponse GetGenres(FetchGenreRequest fetchGenreRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+            Genre genre = new Genre()
+            {
+                Name = genreRequest.Name
+            };
+            await _genreRepository.AddAsync(genre);
+        }
 
-        //public CreateGenreResponse Insert(CreateGenreRequest createGenreRequest)
-        //{
-        //    _genreRepository.Insert(createGenreRequest.Genre);
-        //    return new CreateGenreResponse();
-        //}
+        public async void DeleteAsync()
+        {
+            GenreRequest genreRequest = new GenreRequest();
 
-        //public UpdateGenreResponse Update(UpdateGenreRequest updateGenreRequest)
-        //{
-        //    var gen = _genreRepository.GetById(updateGenreRequest.Id);
-        //    _genreRepository.Update(gen);
-        //    return new UpdateGenreResponse();
-        //}
+            Genre genre = new Genre()
+            {
+                Name = genreRequest.Name
+            };
+            await _genreRepository.DeleteAsync(genre);
+        }
+
+        public Task<List<GenreResponse>> GetAllGenresAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<GenreResponse> GetGenreByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async void UpdateAsync()
+        {
+            GenreRequest genreRequest = new GenreRequest();
+
+            Genre genre = new Genre()
+            {
+                Name = genreRequest.Name
+            };
+            await _genreRepository.UpdateAsync(genre);
+        }
     }
 }

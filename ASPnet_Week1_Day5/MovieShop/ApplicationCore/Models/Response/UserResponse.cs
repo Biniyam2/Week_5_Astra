@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationCore.Entites;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.Models.Response
 {
-    public class UserRequest
+    public class UserResponse
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -21,5 +22,10 @@ namespace ApplicationCore.Models.Response
         public DateTime? LastLoginDateTime { get; set; }
         public byte? IsLocked { get; set; }
         public int? AccessFailedCount { get; set; }
+
+        public ICollection<Favorite> Favorites { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
+        public ICollection<UserRole> UserRoles { get; set; }
+        public ICollection<Review> Reviews { get; set; }
     }
 }

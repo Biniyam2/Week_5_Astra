@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.ServiceInterfaces
 {
-    public  interface IGenreService
+    public interface IGenreService
     {
-        //public CreateGenreResponse Insert(CreateGenreRequest createGenreRequest);
-        //public DeleteGenreResponse Delete(DeleteGenreRequest deleteGenreRequest);
-        //public UpdateGenreResponse Update(UpdateGenreRequest updateGenreRequest);
-        //public GetGenreResponse GetGenre(GetGenreRequest getGenreRequest);
-        //public FetchGenreResponse GetGenres(FetchGenreRequest fetchGenreRequest);
+        public Task<List<GenreResponse>> GetAllGenresAsync();
+        public Task<GenreResponse> GetGenreByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

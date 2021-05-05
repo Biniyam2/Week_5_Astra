@@ -20,7 +20,7 @@ namespace Infrastructure.Services
         {
             _movieRepository = movieRepository;
         }
-        public async Task<List<MovieResponse>> GetAllMovies()
+        public async Task<List<MovieResponse>> GetAllMoviesAsync()
         {
               var movies = await  _movieRepository.ListAllAsync();
 
@@ -46,16 +46,12 @@ namespace Infrastructure.Services
                     CreateBy = movie.CreateBy,
                     UpdateBy = movie.UpdateBy,
                     Budget = movie.Budget,
-                    Title = movie.Title,
-                    MovieCasts = (ICollection<MovieCast>)movie.MovieCasts.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Cast),
-                    MovieCrews = (ICollection<MovieCrew>)movie.MovieCrews.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Crew),
-                    MovieGenres = (ICollection<MovieGenre>)movie.MovieGenres.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Genre),
-                    Reviews = (ICollection<Review>)movie.Reviews.Select(r => r.Rating),
+                    Title = movie.Title
                 });
             }
             return movieResponses;
         }
-        public async Task<MovieResponse> GetMovieById(int id)
+        public async Task<MovieResponse> GetMovieByIdAsync(int id)
         {
          var movie =  await _movieRepository.GetByIdAsync(id);
 
@@ -80,12 +76,14 @@ namespace Infrastructure.Services
                 Budget = movie.Budget,
                 Title = movie.Title,
                 MovieCasts = (ICollection<MovieCast>)movie.MovieCasts.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Cast),
+                MovieCrews = (ICollection<MovieCrew>)movie.MovieCrews.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Crew),
+                MovieGenres = (ICollection<MovieGenre>)movie.MovieGenres.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Genre),
                 Reviews = (ICollection<Review>)movie.Reviews.Select(r => r.Rating)
             };
             
             return movieResponse;
         }
-        public async void Add()
+        public async void AddAsync()
         {
             MovieRequest movieRequest = new MovieRequest();
             Movie movie = new Movie() {
@@ -109,7 +107,7 @@ namespace Infrastructure.Services
             };
            await _movieRepository.AddAsync(movie);
         }
-        public async void Delete()
+        public async void DeleteAsync()
         {
             MovieRequest movieRequest = new MovieRequest();
             Movie movie = new Movie()
@@ -135,7 +133,7 @@ namespace Infrastructure.Services
             };
             await _movieRepository.DeleteAsync(movie);
         }
-        public async void Update()
+        public async void UpdateAsync()
         {
             MovieRequest movieRequest = new MovieRequest();
             Movie movie = new Movie()

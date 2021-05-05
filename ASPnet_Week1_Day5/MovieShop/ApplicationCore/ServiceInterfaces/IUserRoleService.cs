@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IUserRoleService
     {
-        //public CreateUserRoleResponse Insert(CreateUserRoleRequest createMovieRequest);
-        //public DeleteUserRoleResponse Delete(DeleteUserRoleRequest deleteMovieRequest);
-        //public UpdateUserRoleResponse Update(UpdateUserRoleRequest updateMovieRequest);
-        //public GetUserRoleResponse GetUserRole(GetUserRoleRequest getMovieRequest);
-        //public FetchUserRoleResponse GetUserRoles(FetchUserRoleRequest fetchMovieRequest);
+        public Task<List<UserRoleResponse>> GetAllUserRolesAsync();
+        public Task<UserRoleResponse> GetUserRoleByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

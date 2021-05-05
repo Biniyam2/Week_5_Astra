@@ -14,41 +14,68 @@ namespace Infrastructure.Services
 {
     public class UserRoleService : IUserRoleService
     {
-        private readonly IUserRoleRepository _repositery;
+        private readonly IUserRoleRepository _repository;
         public UserRoleService(IUserRoleRepository repositery)
         {
-            _repositery = repositery;
+            _repository = repositery;
         }
-        //public DeleteUserRoleResponse Delete(DeleteUserRoleRequest deleteMovieRequest)
-        //{
-        //    var ur = _repositery.GetById(deleteMovieRequest.Id);
-        //    _repositery.Delete(ur);
-        //    return new DeleteUserRoleResponse();
-        //}
 
-        //public GetUserRoleResponse GetUserRole(GetUserRoleRequest getMovieRequest)
-        //{
-        //    GetUserRoleResponse getUserRoleResponse = new GetUserRoleResponse();
-        //    getUserRoleResponse.UserRole = _repositery.GetById(getMovieRequest.Id);
-        //    return new GetUserRoleResponse();
-        //}
+        public async void AddAsync()
+        {
+            UserRoleRequest userRoleRequest = new UserRoleRequest();
+            UserRole userRole = new UserRole()
+            {
+                UserId = userRoleRequest.UserId,
+                RoleId = userRoleRequest.RoleId
+            };
+            await _repository.AddAsync(userRole);
+        }
 
-        //public FetchUserRoleResponse GetUserRoles(FetchUserRoleRequest fetchMovieRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async void DeleteAsync()
+        {
+            UserRoleRequest userRoleRequest = new UserRoleRequest();
+            UserRole userRole = new UserRole()
+            {
+                UserId = userRoleRequest.UserId,
+                RoleId = userRoleRequest.RoleId
+            };
+            await _repository.DeleteAsync(userRole);
+        }
 
-        //public CreateUserRoleResponse Insert(CreateUserRoleRequest createMovieRequest)
-        //{
-        //    _repositery.Insert(createMovieRequest.UserRole);
-        //    return new CreateUserRoleResponse();
-        //}
+        public async Task<List<UserRoleResponse>> GetAllUserRolesAsync()
+        {
+            var ur = await _repository.ListAllAsync();
+            List<UserRoleResponse> userRoleResponses = new List<UserRoleResponse>();
+            foreach (var item in ur)
+            {
+                userRoleResponses.Add(new UserRoleResponse {
+                    UserId = item.UserId,
+                    RoleId = item.RoleId
+                });
+              
+            }
+            return userRoleResponses;
+        }
 
-        //public UpdateUserRoleResponse Update(UpdateUserRoleRequest updateMovieRequest)
-        //{
-        //    var ur = _repositery.GetById(updateMovieRequest.Id);
-        //    _repositery.Update(ur);
-        //    return new UpdateUserRoleResponse();
-        //}
+        public async Task<UserRoleResponse> GetUserRoleByIdAsync(int id)
+        {
+            var ur =await _repository.GetByIdAsync(id);
+            UserRoleResponse userResponse = new UserRoleResponse() {
+                UserId = ur.UserId,
+                RoleId = ur.RoleId
+            };
+            return userResponse;
+        }
+
+        public async void UpdateAsync()
+        {
+            UserRoleRequest userRoleRequest = new UserRoleRequest();
+            UserRole userRole = new UserRole()
+            {
+                UserId = userRoleRequest.UserId,
+                RoleId = userRoleRequest.RoleId
+            };
+            await _repository.UpdateAsync(userRole);
+        }
     }
 }

@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface ICrewService
     {
-       //public CreateCrewResponse Insert(CreateCrewRequest createCrewRequest);
-       // public DeleteCrewResponse Delete(DeleteCrewRequest deleteCrewRequest);
-       // public UpdateCrewResponse Update(UpdateCrewRequest updateCrewRequest);
-       // public GetCrewResponse GetCrew(GetCrewRequest getCrewRequest);
-       // public FetchCrewResponse GetCrews(FetchCrewRequest fetchCrewRequest);
+        public Task<List<CrewResponse>> GetAllCrewsAsync();
+        public Task<CrewResponse> GetCrewByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

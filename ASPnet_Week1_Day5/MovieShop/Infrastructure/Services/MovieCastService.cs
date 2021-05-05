@@ -20,36 +20,65 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        //public DeleteMovieCastResponse Delete(DeleteMovieCastRequest deleteGenreRequest)
-        //{
-        //    var mc = _repository.GetById(deleteGenreRequest.Id);
-        //    _repository.Delete(mc);
-        //    return new DeleteMovieCastResponse();
-        //}
+        public async void AddAsync()
+        {
+            MovieCastRequest movieCastRequest = new MovieCastRequest();
+            MovieCast movieCast = new MovieCast() { 
+             MovieId = movieCastRequest.MovieId,
+             CastId = movieCastRequest.CastId,
+             Character = movieCastRequest.Character
+            };
+            await _repository.AddAsync(movieCast);
+        }
 
-        //public GetMovieCastResponse GetMovieCast(GetMovieCastRequest getGenreRequest)
-        //{
-        //    GetMovieCastResponse getMovieCast = new GetMovieCastResponse();
-        //    getMovieCast.MovieCast =   _repository.GetById(getGenreRequest.Id);
-        //    return new GetMovieCastResponse();
-        //}
+        public async void DeleteAsync()
+        {
+            MovieCastRequest movieCastRequest = new MovieCastRequest();
+            MovieCast movieCast = new MovieCast()
+            {
+                MovieId = movieCastRequest.MovieId,
+                CastId = movieCastRequest.CastId,
+                Character = movieCastRequest.Character
+            };
+            await _repository.DeleteAsync(movieCast);
+        }
 
-        //public FetchMovieCastResponse GetMovieCasts(FetchMovieCastRequest fetchGenreRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<List<MovieCastResponse>> GetAllMovieCastsAsync()
+        {
+            var mc =await _repository.ListAllAsync();
+            List< MovieCastResponse> movieCastResponses = new List<MovieCastResponse>();
+            foreach (var item in mc)
+            {
+                movieCastResponses.Add(new MovieCastResponse {
+                    MovieId = item.MovieId,
+                    CastId = item.CastId,
+                    Character = item.Character
+                });
+            }
+            return movieCastResponses;
+        }
 
-        //public CreateMovieCastResponse Insert(CreateMovieCastRequest createGenreRequest)
-        //{
-        //    _repository.Insert(createGenreRequest.MovieCast);
-        //    return new CreateMovieCastResponse();
-        //}
+        public async Task<MovieCastResponse> GetMovieCastByIdAsync(int id)
+        {
+            var mc = await _repository.GetByIdAsync(id);
+            MovieCastResponse movieCastResponse = new MovieCastResponse() {
+                MovieId = mc.MovieId,
+                CastId = mc.CastId,
+                Character = mc.Character
+            };
+            return movieCastResponse;
+        }
 
-        //public UpdateMovieCastResponse Update(UpdateMovieCastRequest updateGenreRequest)
-        //{
-        //    var mc = _repository.GetById(updateGenreRequest.Id);
-        //    _repository.Update(mc);
-        //    return new UpdateMovieCastResponse();
-        //}
+        public async void UpdateAsync()
+        {
+            MovieCastRequest movieCastRequest = new MovieCastRequest();
+            MovieCast movieCast = new MovieCast()
+            {
+                MovieId = movieCastRequest.MovieId,
+                CastId = movieCastRequest.CastId,
+                Character = movieCastRequest.Character
+            };
+            await _repository.UpdateAsync(movieCast);
+        }
     }
 }

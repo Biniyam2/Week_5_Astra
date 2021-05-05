@@ -20,36 +20,65 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        //public DeleteTrailerResponse Delete(DeleteTrailerRequest deleteTrailerRequest)
-        //{
-        //    var tr = _repository.GetById(deleteTrailerRequest.Id);
-        //    _repository.Delete(tr);
-        //    return new DeleteTrailerResponse();
-        //}
+        public async void AddAsync()
+        {
+            TrailerRequest trailerRequest = new TrailerRequest();
+            Trailer trailer = new Trailer() {
+                MovieId = trailerRequest.MovieId,
+            TrailerUrl = trailerRequest.TrailerUrl,
+            Name = trailerRequest.Name
+            };
+            await _repository.AddAsync(trailer);
+        }
 
-        //public GetTrailerResponse GetTrailer(GetTrailerRequest getTrailerRequest)
-        //{
-        //    GetTrailerResponse getTrailerResponse = new GetTrailerResponse();
-        //    getTrailerResponse.Trailer = _repository.GetById(getTrailerRequest.Id);
-        //    return new GetTrailerResponse();
-        //}
+        public async void DeleteAsync()
+        {
+            TrailerRequest trailerRequest = new TrailerRequest();
+            Trailer trailer = new Trailer()
+            {
+                MovieId = trailerRequest.MovieId,
+                TrailerUrl = trailerRequest.TrailerUrl,
+                Name = trailerRequest.Name
+            };
+            await _repository.DeleteAsync(trailer);
+        }
 
-        //public FetchTrailerResponse GetTrailers(FetchTrailerRequest fetchTrailerRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public async Task<List<TrailerResponse>> GetAllTrailersAsync()
+        {
+            var tr =await _repository.ListAllAsync();
+            List<TrailerResponse> trailerResponses = new List<TrailerResponse>();
+            foreach (var item in tr)
+            {
+                trailerResponses.Add(new TrailerResponse {
+                    MovieId = item.MovieId,
+                    TrailerUrl = item.TrailerUrl,
+                    Name = item.Name
+                });
+            }
+            return trailerResponses;
+        }
 
-        //public CreateTrailerResponse Insert(CreateTrailerRequest createTrailerRequest)
-        //{
-        //    _repository.Insert(createTrailerRequest.Trailer);
-        //    return new CreateTrailerResponse();
-        //}
+        public async Task<TrailerResponse> GetTrailerByIdAsync(int id)
+        {
+            var tr =await _repository.GetByIdAsync(id);
+            TrailerResponse trailerResponse = new TrailerResponse() {
+                MovieId = tr.MovieId,
+                TrailerUrl = tr.TrailerUrl,
+                Name = tr.Name
+            };
+            return trailerResponse;
+        }
 
-        //public UpdateTrailerResponse Update(UpdateTrailerRequest updateTrailerRequest)
-        //{
-        //    var tr = _repository.GetById(updateTrailerRequest.Id);
-        //    _repository.Update(tr);
-        //    return new UpdateTrailerResponse();
-        //}
+        public async void UpdateAsync()
+        {
+            TrailerRequest trailerRequest = new TrailerRequest();
+            Trailer trailer = new Trailer()
+            {
+                MovieId = trailerRequest.MovieId,
+                TrailerUrl = trailerRequest.TrailerUrl,
+                Name = trailerRequest.Name
+            };
+            await _repository.UpdateAsync(trailer);
+        }
     }
 }

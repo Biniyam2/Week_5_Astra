@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IReviewService
     {
-        //public CreateReviewResponse Insert(CreateReviewRequest createReviewRequest);
-        //public DeleteReviewResponse Delete(DeleteReviewRequest deleteReviewRequest);
-        //public UpdateReviewResponse Update(UpdateReviewRequest updateReviewRequest);
-        //public GetReviewResponse GetReview(GetReviewRequest getReviewRequest);
-        //public FetchReviewResponse GetReviews(FetchReviewRequest fetchReviewRequest);
+        public Task<List<ReviewResponse>> GetAllReviewsAsync();
+        public Task<ReviewResponse> GetReviewByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

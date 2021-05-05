@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IMovieGenreService
     {
-        //public CreateMovieGenreResponse Insert(CreateMovieGenreRequest createGenreRequest);
-        //public DeleteMovieGenreResponse Delete(DeleteMovieGenreRequest deleteGenreRequest);
-        //public UpdateMovieGenreResponse Update(UpdateMovieGenreRequest updateGenreRequest);
-        //public GetMovieGenreResponse GetMovieGenre(GetMovieGenreRequest getGenreRequest);
-        //public FetchMovieGenreResponse GetMovieGenres(FetchMovieGenreRequest fetchGenreRequest);
+        public Task<List<MovieGenreResponse>> GetAllMovieGenresAsync();
+        public Task<MovieGenreResponse> GetMovieGenreByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }

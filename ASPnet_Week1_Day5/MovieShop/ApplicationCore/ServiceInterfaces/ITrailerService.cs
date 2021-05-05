@@ -10,10 +10,10 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface ITrailerService
     {
-        //public CreateTrailerResponse Insert(CreateTrailerRequest createTrailerRequest);
-        //public DeleteTrailerResponse Delete(DeleteTrailerRequest deleteTrailerRequest);
-        //public UpdateTrailerResponse Update(UpdateTrailerRequest updateTrailerRequest);
-        //public GetTrailerResponse GetTrailer(GetTrailerRequest getTrailerRequest);
-        //public FetchTrailerResponse GetTrailers(FetchTrailerRequest fetchTrailerRequest);
+        public Task<List<TrailerResponse>> GetAllTrailersAsync();
+        public Task<TrailerResponse> GetTrailerByIdAsync(int id);
+        public void AddAsync();
+        public void DeleteAsync();
+        public void UpdateAsync();
     }
 }
