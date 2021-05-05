@@ -29,8 +29,7 @@ namespace Infrastructure.Services
                   Gender = castRequest.Gender,
                   Name = castRequest.Name,
                   TmdbUrl = castRequest.TmdbUrl,
-                  ProfilePath = castRequest.ProfilePath,
-                 // MovieCasts = (ICollection<MovieCast>)castRequest.MovieCast
+                  ProfilePath = castRequest.ProfilePath
             };
             _castRepository.AddAsync(cast);
 
