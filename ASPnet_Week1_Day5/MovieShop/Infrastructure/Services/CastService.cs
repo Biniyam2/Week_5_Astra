@@ -21,36 +21,79 @@ namespace Infrastructure.Services
         {
             _castRepository = castRepository;
         }
-        //public DeleteCastResponse Delete(DeleteCastRequest deleteCrewRequest)
-        //{
-        //   var cast = _castRepository.GetById(deleteCrewRequest.Id);
-        //    _castRepository.Delete(cast);
-        //    return new DeleteCastResponse();
-        //}
 
-        //public GetCastResponse GetCast(GetCastRequest getCrewRequest)
-        //{
-        //    GetCastResponse cast = new GetCastResponse();
-        //    cast.Cast = _castRepository.GetById(getCrewRequest.Id);
-        //    return new GetCastResponse();
-        //}
+        public void Add()
+        {
+            CastRequest castRequest = new CastRequest();
+            Cast cast = new Cast() { 
+                  Gender = castRequest.Gender,
+                  Name = castRequest.Name,
+                  TmdbUrl = castRequest.TmdbUrl,
+                  ProfilePath = castRequest.ProfilePath,
+                 // MovieCasts = (ICollection<MovieCast>)castRequest.MovieCast
+            };
+            _castRepository.AddAsync(cast);
 
-        //public FetchCastResponse GetCasts(FetchCastRequest fetchCrewRequest)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        }
 
-        //public CreateCastResponse Insert(CreateCastRequest createCastRequest)
-        //{
-        //    _castRepository.Insert(createCastRequest.Cast);
-        //    return new CreateCastResponse();
-        //}
+        public void Delete()
+        {
+            CastRequest castRequest = new CastRequest();
+            Cast cast = new Cast()
+            {
+                Gender = castRequest.Gender,
+                Name = castRequest.Name,
+                TmdbUrl = castRequest.TmdbUrl,
+                ProfilePath = castRequest.ProfilePath
+            };
+            _castRepository.DeleteAsync(cast);
+        }
 
-        //public UpdateCastResponse Update(UpdateCastRequest updateCrewRequest)
-        //{
-        //    var cast = _castRepository.GetById(updateCrewRequest.Id);
-        //    _castRepository.Update(cast);
-        //    return new UpdateCastResponse();
-        //}
+        public async Task<List<CastResponse>> GetAllCasts()
+        {
+            var cast = await _castRepository.ListAllAsync();
+            
+            List<CastResponse> castResponses = new List<CastResponse>();
+
+            foreach (var item in cast)
+            {
+                castResponses.Add(new CastResponse {
+
+                    Gender = item.Gender,
+                    Name = item.Name,
+                    TmdbUrl = item.TmdbUrl,
+                    ProfilePath = item.ProfilePath,
+                    MovieCasts = (ICollection<MovieCast>)item.MovieCasts.Where(mc => mc.CastId == item.Id).Select(mc => mc.Movie)
+                });
+            }
+            return castResponses;
+        }
+
+        public async Task<CastResponse> GetCastById(int id)
+        {
+            var cast =await _castRepository.GetByIdAsync(id);
+            CastResponse castResponse = new CastResponse() {
+                Gender = cast.Gender,
+                Name = cast.Name,
+                TmdbUrl = cast.TmdbUrl,
+                ProfilePath = cast.ProfilePath,
+                MovieCasts = (ICollection<MovieCast>)cast.MovieCasts.Where(mc => mc.CastId == cast.Id).Select(mc => mc.Movie)
+
+            };
+            return castResponse;
+        }
+
+        public async void Update()
+        {
+            CastRequest castRequest = new CastRequest();
+            Cast cast = new Cast() {
+                Gender = castRequest.Gender,
+                Name = castRequest.Name,
+                TmdbUrl = castRequest.TmdbUrl,
+                ProfilePath = castRequest.ProfilePath
+            };
+            await _castRepository.UpdateAsync(cast);
+        }
+        
     }
 }

@@ -20,7 +20,148 @@ namespace Infrastructure.Services
         {
             _movieRepository = movieRepository;
         }
+        public async Task<List<MovieResponse>> GetAllMovies()
+        {
+              var movies = await  _movieRepository.ListAllAsync();
 
+            var movieResponses = new List<MovieResponse>(); 
+            foreach (var movie in movies)
+            {
+                movieResponses.Add(new MovieResponse {
+
+                    Id = movie.Id,
+                    OverView = movie.OverView,
+                    Tagline = movie.Tagline,
+                    Revenue = movie.Revenue,
+                    ImdbUrl = movie.ImdbUrl,
+                    TmdbUrl = movie.TmdbUrl,
+                    PosterUrl = movie.PosterUrl,
+                    BackdropUrl = movie.BackdropUrl,
+                    OriginalLanguage = movie.OriginalLanguage,
+                    ReleaseDate = movie.ReleaseDate,
+                    RunTime = movie.RunTime,
+                    Price = movie.Price,
+                    CreateDate = movie.CreateDate,
+                    UpdateDate = movie.UpdateDate,
+                    CreateBy = movie.CreateBy,
+                    UpdateBy = movie.UpdateBy,
+                    Budget = movie.Budget,
+                    Title = movie.Title,
+                    MovieCasts = (ICollection<MovieCast>)movie.MovieCasts.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Cast),
+                    MovieCrews = (ICollection<MovieCrew>)movie.MovieCrews.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Crew),
+                    MovieGenres = (ICollection<MovieGenre>)movie.MovieGenres.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Genre),
+                    Reviews = (ICollection<Review>)movie.Reviews.Select(r => r.Rating),
+                });
+            }
+            return movieResponses;
+        }
+        public async Task<MovieResponse> GetMovieById(int id)
+        {
+         var movie =  await _movieRepository.GetByIdAsync(id);
+
+            MovieResponse movieResponse = new MovieResponse() {
+
+                Id = movie.Id,
+                OverView = movie.OverView,
+                Tagline = movie.Tagline,
+                Revenue = movie.Revenue,
+                ImdbUrl = movie.ImdbUrl,
+                TmdbUrl = movie.TmdbUrl,
+                PosterUrl = movie.PosterUrl,
+                BackdropUrl = movie.BackdropUrl,
+                OriginalLanguage = movie.OriginalLanguage,
+                ReleaseDate = movie.ReleaseDate,
+                RunTime = movie.RunTime,
+                Price = movie.Price,
+                CreateDate = movie.CreateDate,
+                UpdateDate = movie.UpdateDate,
+                CreateBy = movie.CreateBy,
+                UpdateBy = movie.UpdateBy,
+                Budget = movie.Budget,
+                Title = movie.Title,
+                MovieCasts = (ICollection<MovieCast>)movie.MovieCasts.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Cast),
+                Reviews = (ICollection<Review>)movie.Reviews.Select(r => r.Rating)
+            };
+            
+            return movieResponse;
+        }
+        public async void Add()
+        {
+            MovieRequest movieRequest = new MovieRequest();
+            Movie movie = new Movie() {
+                OverView = movieRequest.OverView,
+                Tagline = movieRequest.Tagline,
+                Revenue = movieRequest.Revenue,
+                ImdbUrl = movieRequest.ImdbUrl,
+                TmdbUrl = movieRequest.TmdbUrl,
+                PosterUrl = movieRequest.PosterUrl,
+                BackdropUrl = movieRequest.BackdropUrl,
+                OriginalLanguage = movieRequest.OriginalLanguage,
+                ReleaseDate = movieRequest.ReleaseDate,
+                RunTime = movieRequest.RunTime,
+                Price = movieRequest.Price,
+                CreateDate = movieRequest.CreateDate,
+                UpdateDate = movieRequest.UpdateDate,
+                CreateBy = movieRequest.CreateBy,
+                UpdateBy = movieRequest.UpdateBy,
+                Budget = movieRequest.Budget,
+                Title = movieRequest.Title
+            };
+           await _movieRepository.AddAsync(movie);
+        }
+        public async void Delete()
+        {
+            MovieRequest movieRequest = new MovieRequest();
+            Movie movie = new Movie()
+            {
+                Id = movieRequest.Id,
+                OverView = movieRequest.OverView,
+                Tagline = movieRequest.Tagline,
+                Revenue = movieRequest.Revenue,
+                ImdbUrl = movieRequest.ImdbUrl,
+                TmdbUrl = movieRequest.TmdbUrl,
+                PosterUrl = movieRequest.PosterUrl,
+                BackdropUrl = movieRequest.BackdropUrl,
+                OriginalLanguage = movieRequest.OriginalLanguage,
+                ReleaseDate = movieRequest.ReleaseDate,
+                RunTime = movieRequest.RunTime,
+                Price = movieRequest.Price,
+                CreateDate = movieRequest.CreateDate,
+                UpdateDate = movieRequest.UpdateDate,
+                CreateBy = movieRequest.CreateBy,
+                UpdateBy = movieRequest.UpdateBy,
+                Budget = movieRequest.Budget,
+                Title = movieRequest.Title
+            };
+            await _movieRepository.DeleteAsync(movie);
+        }
+        public async void Update()
+        {
+            MovieRequest movieRequest = new MovieRequest();
+            Movie movie = new Movie()
+            {
+                Id = movieRequest.Id,
+                OverView = movieRequest.OverView,
+                Tagline = movieRequest.Tagline,
+                Revenue = movieRequest.Revenue,
+                ImdbUrl = movieRequest.ImdbUrl,
+                TmdbUrl = movieRequest.TmdbUrl,
+                PosterUrl = movieRequest.PosterUrl,
+                BackdropUrl = movieRequest.BackdropUrl,
+                OriginalLanguage = movieRequest.OriginalLanguage,
+                ReleaseDate = movieRequest.ReleaseDate,
+                RunTime = movieRequest.RunTime,
+                Price = movieRequest.Price,
+                CreateDate = movieRequest.CreateDate,
+                UpdateDate = movieRequest.UpdateDate,
+                CreateBy = movieRequest.CreateBy,
+                UpdateBy = movieRequest.UpdateBy,
+                Budget = movieRequest.Budget,
+                Title = movieRequest.Title
+            };
+
+            await _movieRepository.UpdateAsync(movie);
+        }
         public async Task<List<MovieResponse>> GetTop30RevenueMovie()
         {
             var movies = await _movieRepository.GetTop30HighestRevenueMovies();

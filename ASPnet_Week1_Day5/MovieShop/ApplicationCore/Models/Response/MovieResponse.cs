@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationCore.Entites;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,5 +27,13 @@ namespace ApplicationCore.Models.Response
         public DateTime? UpdateDate { get; set; }
         public string CreateBy { get; set; }
         public string UpdateBy { get; set; }
+
+        public ICollection<MovieCrew> MovieCrews { get; set; }
+        public ICollection<MovieCast> MovieCasts { get; set; }
+        public ICollection<MovieGenre> MovieGenres { get; set; }
+        public ICollection<Review> Reviews { get; set; }
+        public ICollection<Favorite> Favorites { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
+        public ICollection<Trailer> Trailers { get; set; }
     }
 }

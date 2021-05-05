@@ -10,6 +10,11 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface ICastService
     {
+        public Task<List<CastResponse>> GetAllCasts();
+        public Task<CastResponse> GetCastById(int id);
+        public void Add();
+        public void Delete();
+        public void Update();
         //public CreateCastResponse Insert(CreateCastRequest createCastRequest);
         //public DeleteCastResponse Delete(DeleteCastRequest deleteCrewRequest);
         //public UpdateCastResponse Update(UpdateCastRequest updateCrewRequest);
