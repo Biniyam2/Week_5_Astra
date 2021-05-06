@@ -23,11 +23,12 @@ namespace Infrastructure.Repositories
             return movies;
         }
 
-        //public override async Task<Movie> GetByIdAsync(int id)
-        //{
-        //    var movie = await _dbContext.Movies.FirstOrDefaultAsync(m => m.Id == id);
-        //    return movie;
-        //}
+        public override async Task<Movie> GetByIdAsync(int id)
+        {
+            var movie = await _dbContext.Movies.Include(m => m.Reviews)/*.Include(m => m.Genres)/*.ThenInclude(g => g.MovieGenres).Include(m => m.Casts).ThenInclude(c => c.MovieCasts)*/.FirstOrDefaultAsync(m => m.Id == id);
+            return movie;
+
+        }
 
 
     }

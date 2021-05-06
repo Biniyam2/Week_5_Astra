@@ -42,9 +42,17 @@ namespace Infrastructure.Services
             await _genreRepository.DeleteAsync(genre);
         }
 
-        public Task<List<GenreResponse>> GetAllGenresAsync()
+        public async Task<List<GenreResponse>> GetAllGenresAsync()
         {
-            throw new NotImplementedException();
+            var gn =await _genreRepository.ListAllAsync();
+            List<GenreResponse> genreResponses = new List<GenreResponse>();
+            foreach (var item in gn)
+            {
+                genreResponses.Add(new GenreResponse {
+                    Name = item.Name
+                });
+            }
+            return genreResponses;
         }
 
         public Task<GenreResponse> GetGenreByIdAsync(int id)

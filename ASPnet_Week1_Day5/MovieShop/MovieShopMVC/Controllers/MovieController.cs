@@ -18,29 +18,31 @@ namespace MovieShop.MVC.Controllers
         {
             _movieService = movieService;
         }
+
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetMoviesByGenre(int id)
+        //{
+        //    //var movies = await _movieService.g;
+        //    return View("Index.cshtml");
+        //}
         // GET: MovieController
-        [HttpGet]
-        public async Task<IActionResult> Index()
-        {
-            var movies = await _movieService.GetAllMoviesAsync();
-            return View(movies);
-        }
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> Index(int id)
+        public async Task<IActionResult> Details(int id)
         {
             var movies = await _movieService.GetMovieByIdAsync(id);
             return View(movies);
         }
         [HttpPost]
-        public IActionResult Create()
+        public IActionResult  Create()
         {
             _movieService.AddAsync();
             return View("Index");
         }
         [HttpPut()]
-        public IActionResult Edit()
+        public  IActionResult Edit()
         {
-             _movieService.UpdateAsync();
+           _movieService.UpdateAsync();
             return View("Index");
         }
         [HttpDelete]

@@ -16,7 +16,7 @@ namespace Infrastructure.Services
     {
         private readonly IMovieRepository _movieRepository;
 
-        public MovieService(IMovieRepository movieRepository)
+        public MovieService( IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
         }
@@ -53,6 +53,7 @@ namespace Infrastructure.Services
         }
         public async Task<MovieResponse> GetMovieByIdAsync(int id)
         {
+
          var movie =  await _movieRepository.GetByIdAsync(id);
 
             MovieResponse movieResponse = new MovieResponse() {
@@ -75,10 +76,11 @@ namespace Infrastructure.Services
                 UpdateBy = movie.UpdateBy,
                 Budget = movie.Budget,
                 Title = movie.Title,
-                MovieCasts = (ICollection<MovieCast>)movie.MovieCasts.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Cast),
-                MovieCrews = (ICollection<MovieCrew>)movie.MovieCrews.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Crew),
-                MovieGenres = (ICollection<MovieGenre>)movie.MovieGenres.Where(mc => mc.MovieId == movie.Id).Select(mc => mc.Genre),
-                Reviews = (ICollection<Review>)movie.Reviews.Select(r => r.Rating)
+                Rating = movie.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating)
+                //Genres = (ICollection<Genre>)movie.Genres.Select(mc => mc.Name),
+                //Casts = (ICollection<Cast>)movie.Casts.Select(mc => mc.Name),
+                // Crews = (ICollection<Crew>)movie.Crews.Select(mc => mc.ProfilePath)
+
             };
             
             return movieResponse;
@@ -158,7 +160,7 @@ namespace Infrastructure.Services
                 Title = movieRequest.Title
             };
 
-            await _movieRepository.UpdateAsync(movie);
+           await _movieRepository.UpdateAsync(movie);
         }
         public async Task<List<MovieResponse>> GetTop30RevenueMovie()
         {
