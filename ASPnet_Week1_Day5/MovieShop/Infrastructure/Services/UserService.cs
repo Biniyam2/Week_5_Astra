@@ -137,10 +137,10 @@ namespace Infrastructure.Services
                 LockoutEndDate = user.LockoutEndDate,
                 IsLocked = user.IsLocked,
                 AccessFailedCount = user.AccessFailedCount,
-                //Purchases = (IEnumerable<Purchase>)user.Purchases.Where(u => u.UserId == user.Id).Select(u => u.Movie),
-                //Favorites = (IEnumerable<Favorite>)user.Favorites.Where(u => u.UserId == user.Id).Select(u => u.Movie),
-                //UserRoles = (IEnumerable<UserRole>)user.UserRoles.Where(u => u.UserId == user.Id).Select(u => u.Role),
-                //Reviews = (IEnumerable<Review>)user.Reviews.Where(u => u.UserId == user.Id).Select(u => u.Rating)
+                Purchases = (IEnumerable<Purchase>)user.Purchases.Where(u => u.UserId == user.Id),
+                Favorites = (IEnumerable<Favorite>)user.Favorites.Where(u => u.UserId == user.Id),
+                UserRoles = (IEnumerable<UserRole>)user.UserRoles.Where(u => u.UserId == user.Id),
+                Reviews = (IEnumerable<Review>)user.Reviews.Where(u => u.UserId == user.Id)
             };
             return userResponses;
         }

@@ -30,22 +30,7 @@ namespace Infrastructure.Services
                 movieResponses.Add(new MovieResponse {
 
                     Id = movie.Id,
-                    OverView = movie.OverView,
-                    Tagline = movie.Tagline,
-                    Revenue = movie.Revenue,
-                    ImdbUrl = movie.ImdbUrl,
-                    TmdbUrl = movie.TmdbUrl,
                     PosterUrl = movie.PosterUrl,
-                    BackdropUrl = movie.BackdropUrl,
-                    OriginalLanguage = movie.OriginalLanguage,
-                    ReleaseDate = movie.ReleaseDate,
-                    RunTime = movie.RunTime,
-                    Price = movie.Price,
-                    CreateDate = movie.CreateDate,
-                    UpdateDate = movie.UpdateDate,
-                    CreateBy = movie.CreateBy,
-                    UpdateBy = movie.UpdateBy,
-                    Budget = movie.Budget,
                     Title = movie.Title,
 
                 });
@@ -204,7 +189,6 @@ namespace Infrastructure.Services
             {
                 movieResponses.Add(new MovieResponse
                 {
-
                     Id = movie.Id,
                     OverView = movie.OverView,
                     Tagline = movie.Tagline,

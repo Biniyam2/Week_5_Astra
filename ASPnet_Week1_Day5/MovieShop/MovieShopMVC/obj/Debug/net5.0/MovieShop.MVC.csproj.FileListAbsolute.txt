@@ -566,3 +566,4 @@ C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\Movie
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Shared\Components\Genres\Default.cshtml.g.cs
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Account\EditProfile.cshtml.g.cs
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\Account\Profile.cshtml.g.cs
+C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShopMVC\obj\Debug\net5.0\Razor\Views\User\Purchases.cshtml.g.cs
