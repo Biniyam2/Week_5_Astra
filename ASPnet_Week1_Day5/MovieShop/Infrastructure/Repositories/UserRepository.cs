@@ -30,5 +30,11 @@ namespace Infrastructure.Repositories
             var entity = await _dbContext.Users.Include(u => u.Purchases).Include(u => u.Favorites).Include(u => u.UserRoles).ThenInclude(ur => ur.Role).Include(u => u.Reviews).FirstOrDefaultAsync(u => u.Id == id);
             return entity;
         }
+
+        public override async Task<IEnumerable<User>> ListAllAsync()
+        {
+            var data = await _dbContext.Users.Include(u => u.Purchases).Include(u => u.Favorites).Include(u => u.UserRoles).ThenInclude(ur => ur.Role).Include(u => u.Reviews).ToListAsync();
+            return data;
+        }
     }
 }

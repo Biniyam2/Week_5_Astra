@@ -23,6 +23,12 @@ namespace ApplicationCore.Models.Response
         public byte? IsLocked { get; set; }
         public int? AccessFailedCount { get; set; }
 
+
+        //public IEnumerable<FavoriteResponse> FavoritesResponse { get; set; }
+        //public IEnumerable<PurchaseResponse> PurchasesResponse { get; set; }
+        //public IEnumerable<UserRoleResponse> UserRolesResponse { get; set; }
+        //public IEnumerable<ReviewResponse> ReviewsResponse { get; set; }
+
         public IEnumerable<Favorite> Favorites { get; set; }
         public IEnumerable<Purchase> Purchases { get; set; }
         public IEnumerable<UserRole> UserRoles { get; set; }

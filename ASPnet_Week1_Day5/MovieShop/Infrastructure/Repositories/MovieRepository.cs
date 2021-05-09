@@ -36,6 +36,5 @@ namespace Infrastructure.Repositories
             var movie =await  _dbContext.MovieGenres.Include(mg => mg.Movie).Where(mg => mg.GenreId == id).Select(mg => mg.Movie).ToListAsync();
             return (IEnumerable<Movie>)movie;
         }
-
     }
 }

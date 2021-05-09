@@ -102,6 +102,7 @@ namespace Infrastructure.Services
             foreach (var item in user)
             {
                 userResponses.Add(new UserResponse {
+                    Id = item.Id,
                     FirstName = item.FirstName,
                     LastName = item.LastName,
                     DateOfBirth = item.DateOfBirth,
@@ -113,7 +114,12 @@ namespace Infrastructure.Services
                     LastLoginDateTime = item.LastLoginDateTime,
                     LockoutEndDate = item.LockoutEndDate,
                     IsLocked = item.IsLocked,
-                    AccessFailedCount = item.AccessFailedCount
+                    AccessFailedCount = item.AccessFailedCount,
+                    Purchases = item.Purchases.Where(u => u.UserId == item.Id) ,
+                    Favorites = item.Favorites.Where(u => u.UserId == item.Id),
+                    UserRoles = item.UserRoles.Where(u => u.UserId == item.Id) ,
+                    Reviews = item.Reviews.Where(u => u.UserId == item.Id) 
+
                 });
               
             }
@@ -137,17 +143,16 @@ namespace Infrastructure.Services
                 LockoutEndDate = user.LockoutEndDate,
                 IsLocked = user.IsLocked,
                 AccessFailedCount = user.AccessFailedCount,
-                Purchases = (IEnumerable<Purchase>)user.Purchases.Where(u => u.UserId == user.Id),
-                Favorites = (IEnumerable<Favorite>)user.Favorites.Where(u => u.UserId == user.Id),
-                UserRoles = (IEnumerable<UserRole>)user.UserRoles.Where(u => u.UserId == user.Id),
-                Reviews = (IEnumerable<Review>)user.Reviews.Where(u => u.UserId == user.Id)
+                Purchases = user.Purchases.Where(u => u.UserId == user.Id) ,
+                Favorites = user.Favorites.Where(u => u.UserId == user.Id) ,
+                UserRoles = user.UserRoles.Where(u => u.UserId == user.Id) ,
+                Reviews= user.Reviews.Where(u => u.UserId == user.Id) 
             };
             return userResponses;
         }
 
         public async void UpdateAsync(UserRequest userRequest)
         {
-           // UserResponse userResponse = new UserResponse();
             User user = new User()
             {
                 Id = userRequest.Id,
@@ -213,11 +218,7 @@ namespace Infrastructure.Services
                 LastLoginDateTime = user.LastLoginDateTime,
                 LockoutEndDate = user.LockoutEndDate,
                 IsLocked = user.IsLocked,
-                AccessFailedCount = user.AccessFailedCount,
-                //Purchases = (IEnumerable<Purchase>)user.Purchases.Where(u => u.UserId == user.Id).Select(u => u.Movie),
-                //Favorites = (IEnumerable<Favorite>)user.Favorites.Where(u => u.UserId == user.Id).Select(u => u.Movie),
-                //UserRoles = (IEnumerable<UserRole>)user.UserRoles.Where(u => u.UserId == user.Id).Select(u => u.Role),
-                //Reviews = (IEnumerable<Review>)user.Reviews.Where(u => u.UserId == user.Id).Select(u => u.Rating)
+                AccessFailedCount = user.AccessFailedCount
             };
             return userResponses;
         }

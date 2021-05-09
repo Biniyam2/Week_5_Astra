@@ -63,8 +63,8 @@ namespace Infrastructure.Services
                 Budget = movie.Budget,
                 Title = movie.Title,
                 Rating = movie.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
-                Genres = (IEnumerable<Genre>)movie.MovieGenres.Select(mc => mc.Genre),
-                Casts = (IEnumerable<Cast>)movie.MovieCasts.Select(mc => mc.Cast)
+                Genres = movie.MovieGenres.Select(mc => mc.Genre) ,
+                Casts = movie.MovieCasts.Select(mc => mc.Cast) 
 
             };
 

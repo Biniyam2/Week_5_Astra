@@ -85,7 +85,7 @@ namespace Infrastructure.Services
                 Name = cast.Name,
                 TmdbUrl = cast.TmdbUrl,
                 ProfilePath = cast.ProfilePath,
-                MovieCasts = (ICollection<MovieCast>)cast.MovieCasts.Where(mc => mc.CastId == cast.Id).Select(mc => mc.Movie)
+                MovieCasts= (ICollection<MovieCast>)cast.MovieCasts.Where(mc => mc.CastId == cast.Id).Select(mc => mc.Movie)
 
             };
             return castResponse;

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MovieShop.MVC.Controllers
 {
@@ -80,6 +81,7 @@ namespace MovieShop.MVC.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Profile(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -87,6 +89,7 @@ namespace MovieShop.MVC.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> EditProfile(/*int id*/)
         {
             // call the database and get the user information and fill that in textboxes so that user can edit and save info
