@@ -12,8 +12,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<GenreResponse>> GetAllGenresAsync();
         public Task<GenreResponse> GetGenreByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public void AddAsync(GenreRequest genreRequest);
+        public void DeleteAsync(GenreRequest genreRequest);
+        public void UpdateAsync(GenreRequest genreRequest);
     }
 }

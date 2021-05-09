@@ -20,9 +20,9 @@ namespace Infrastructure.Services
             _genreRepository = genreRepository;
         }
 
-        public async void AddAsync()
+        public async void AddAsync(GenreRequest genreRequest)
         {
-            GenreRequest genreRequest = new GenreRequest();
+           
 
             Genre genre = new Genre()
             {
@@ -31,9 +31,9 @@ namespace Infrastructure.Services
             await _genreRepository.AddAsync(genre);
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(GenreRequest genreRequest)
         {
-            GenreRequest genreRequest = new GenreRequest();
+           
 
             Genre genre = new Genre()
             {
@@ -49,20 +49,27 @@ namespace Infrastructure.Services
             foreach (var item in gn)
             {
                 genreResponses.Add(new GenreResponse {
+                    Id = item.Id,
                     Name = item.Name
                 });
             }
             return genreResponses;
         }
 
-        public Task<GenreResponse> GetGenreByIdAsync(int id)
+        public async Task<GenreResponse> GetGenreByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var gen = await _genreRepository.GetByIdAsync(id);
+            GenreResponse genreResponse = new GenreResponse()
+            {
+                Id = gen.Id,
+                Name = gen.Name
+            };
+            return genreResponse;
         }
 
-        public async void UpdateAsync()
+        public async void UpdateAsync(GenreRequest genreRequest)
         {
-            GenreRequest genreRequest = new GenreRequest();
+            
 
             Genre genre = new Genre()
             {
@@ -72,3 +79,8 @@ namespace Infrastructure.Services
         }
     }
 }
+
+
+
+
+

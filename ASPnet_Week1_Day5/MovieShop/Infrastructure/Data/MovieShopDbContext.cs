@@ -18,6 +18,9 @@ namespace Infrastructure.Data
             builder.Entity<Movie>().Property(m => m.Budget).HasDefaultValue(9.9m);
             builder.Entity<Movie>().Property(m => m.Revenue).HasDefaultValue(9.9m);
             builder.Entity<Movie>().Property(m => m.Price).HasDefaultValue(9.9m);
+
+            builder.Entity<MovieGenre>().HasKey(table => new { table.MovieId, table.GenreId });
+
             builder.Entity<MovieCast>().HasKey(table => new {table.CastId, table.MovieId, table.Character});
             builder.Entity<MovieCrew>().HasKey(table => new { table.MovieId, table.CrewId, table.Department, table.Job });
             builder.Entity<MovieGenre>().HasKey(table => new { table.MovieId, table.GenreId });

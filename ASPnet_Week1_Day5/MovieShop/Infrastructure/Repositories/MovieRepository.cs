@@ -25,11 +25,17 @@ namespace Infrastructure.Repositories
 
         public override async Task<Movie> GetByIdAsync(int id)
         {
-            var movie = await _dbContext.Movies.Include(m => m.Reviews)/*.Include(m => m.Genres)/*.ThenInclude(g => g.MovieGenres).Include(m => m.Casts).ThenInclude(c => c.MovieCasts)*/.FirstOrDefaultAsync(m => m.Id == id);
-            return movie;
 
+            var movie = await _dbContext.Movies.Include(c => c.MovieCasts).ThenInclude(mc => mc.Cast).Include(m=>m.MovieGenres).ThenInclude(m=>m.Genre).Include(m => m.Reviews).FirstOrDefaultAsync(m => m.Id == id);
+          
+            return movie;
         }
 
+        public async Task<IEnumerable<Movie>> GetByGenreAsync(int id)
+        {
+            var movie =await  _dbContext.MovieGenres.Include(mg => mg.Movie).Where(mg => mg.GenreId == id).Select(mg => mg.Movie).ToListAsync();
+            return (IEnumerable<Movie>)movie;
+        }
 
     }
 }

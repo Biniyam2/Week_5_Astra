@@ -12,8 +12,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<CastResponse>> GetAllCastsAsync();
         public Task<CastResponse> GetCastByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public void AddAsync(CastRequest castRequest);
+        public void DeleteAsync(CastRequest castRequest);
+        public void UpdateAsync(CastRequest castRequest);
     }
 }

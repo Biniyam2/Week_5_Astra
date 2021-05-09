@@ -6,7 +6,7 @@
 
             <div class="row col_size">
                 <div class="col-md-4 col_size">
-                    <img style="max-height:70%; max-width:70%" src=" @Html.DisplayFor(model => model.PosterUrl) " />
+                    <img style="max-height:70%; max-width:70%" alt="@Model.Title" src=" @Html.DisplayFor(model => model.PosterUrl) " />
                 </div>
 
                 <div class="col-md-4 text-white col_size">
@@ -30,117 +30,16 @@
             </div>
 
         </div>
-
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OverView)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OverView)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tagline)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tagline)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Budget)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Budget)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Revenue)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Revenue)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ImdbUrl)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ImdbUrl)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TmdbUrl)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TmdbUrl)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PosterUrl)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PosterUrl)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BackdropUrl)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BackdropUrl)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.OriginalLanguage)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.OriginalLanguage)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RunTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RunTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UpdateDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreateBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreateBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdateBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UpdateBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Rating)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Rating)
-        </dd>
-    </dl>
+        <div>
+            @foreach (var item in Model.Casts)
+             {
+                <div class="card col-1">
+                    <img class="rounded-circle card-img-top" src="@item.ProfilePath" alt="@item.Name" style="width:100%; height:100%"/>
+                    <label class="card-title"> @Html.DisplayFor(cast => item.Name) </label> 
+                </div>
+             }
+        </div>
+    
 </div>
 <div>
     <a asp-controller="Movie" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |

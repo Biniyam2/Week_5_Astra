@@ -11,6 +11,6 @@ namespace ApplicationCore.Models.Response
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
+        public IEnumerable<UserRole> UserRoles { get; set; }
     }
 }

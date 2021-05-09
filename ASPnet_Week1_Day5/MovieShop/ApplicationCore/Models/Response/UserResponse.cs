@@ -23,9 +23,9 @@ namespace ApplicationCore.Models.Response
         public byte? IsLocked { get; set; }
         public int? AccessFailedCount { get; set; }
 
-        public ICollection<Favorite> Favorites { get; set; }
-        public ICollection<Purchase> Purchases { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
-        public ICollection<Review> Reviews { get; set; }
+        public IEnumerable<Favorite> Favorites { get; set; }
+        public IEnumerable<Purchase> Purchases { get; set; }
+        public IEnumerable<UserRole> UserRoles { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
     }
 }

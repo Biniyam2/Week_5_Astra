@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.Entites;
+using ApplicationCore.Models.Request;
 using ApplicationCore.Models.Response;
 using ApplicationCore.ServiceInterfaces;
 using Infrastructure.Data;
@@ -14,49 +15,68 @@ namespace MovieShop.MVC.Controllers
     public class MovieController : Controller
     {
         private readonly IMovieService _movieService;
+
         public MovieController(IMovieService movieService)
         {
             _movieService = movieService;
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<IActionResult> GetMoviesByGenre(int id)
-        //{
-        //    //var movies = await _movieService.g;
-        //    return View("Index.cshtml");
-        //}
+        [HttpGet]
+        public async Task<IActionResult> GetMoviesByGenre(int id)
+        {
+            var movie = await _movieService.GetMoviesByGenreAsync(id);
+            return View("~/Views/Home/Index.cshtml", movie);
+        }
         // GET: MovieController
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
             var movies = await _movieService.GetMovieByIdAsync(id);
             return View(movies);
         }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            return View();
+        }
         [HttpPost]
-        public IActionResult  Create()
+        public async Task<IActionResult> Create(MovieRequest movieRequest)
         {
-            _movieService.AddAsync();
-            return View("Index");
+            _movieService.AddAsync(movieRequest);
+            return RedirectToAction("Index", "Home");
         }
-        [HttpPut()]
-        public  IActionResult Edit()
+        [HttpGet]
+        public IActionResult Edit()
         {
-           _movieService.UpdateAsync();
-            return View("Index");
-        }
-        [HttpDelete]
-        public IActionResult Delete() 
-        {
-            _movieService.DeleteAsync();
-            return View("Index");
+            return View();
         }
 
+        [HttpPut]
+        public IActionResult Edit(MovieRequest movieRequest)
+        {
+            _movieService.UpdateAsync(movieRequest);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Delete()
+        {
+            return View();
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(MovieRequest movieRequest)
+        {
+            _movieService.DeleteAsync(movieRequest);
+            return RedirectToAction("Index", "Home");
+        }
 
         public async Task<IActionResult> TopRatedMovies()
         {
-           var movies = await _movieService.GetTop30RevenueMovie();
+            var movies = await _movieService.GetTop30RevenueMovie();
             return View(movies);
         }
+
     }
 }

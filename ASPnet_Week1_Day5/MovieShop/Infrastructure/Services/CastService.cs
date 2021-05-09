@@ -22,9 +22,9 @@ namespace Infrastructure.Services
             _castRepository = castRepository;
         }
 
-        public async void AddAsync()
+        public async void AddAsync(CastRequest castRequest)
         {
-            CastRequest castRequest = new CastRequest();
+          
             Cast cast = new Cast() { 
                   Gender = castRequest.Gender,
                   Name = castRequest.Name,
@@ -34,9 +34,9 @@ namespace Infrastructure.Services
           await  _castRepository.AddAsync(cast);
 
         }
-        public async void UpdateAsync()
+        public async void UpdateAsync(CastRequest castRequest)
         {
-            CastRequest castRequest = new CastRequest();
+           
             Cast cast = new Cast()
             {
                 Gender = castRequest.Gender,
@@ -46,9 +46,9 @@ namespace Infrastructure.Services
             };
             await _castRepository.UpdateAsync(cast);
         }
-        public async void DeleteAsync()
+        public async void DeleteAsync(CastRequest castRequest)
         {
-            CastRequest castRequest = new CastRequest();
+           
             Cast cast = new Cast()
             {
                 Gender = castRequest.Gender,

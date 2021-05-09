@@ -10,10 +10,12 @@ namespace ApplicationCore.ServiceInterfaces
 {
     public interface IUserService
     {
-        public Task<List<UserResponse>> GetAllUsersAsync();
+        public Task<UserResponse> ValidateUser(string email, string password);
+        public Task<IEnumerable<UserResponse>> GetAllUsersAsync();
         public Task<UserResponse> GetUserByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<UserResponse> GetUserByEmailAsync(string email);
+        public void AddAsync(UserRequest userRequest);
+        public void DeleteAsync(UserRequest userRequest);
+        public void UpdateAsync(UserRequest userRequest);
     }
 }

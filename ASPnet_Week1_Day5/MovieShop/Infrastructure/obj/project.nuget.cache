@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "UDkikKDo7AIEV4/fNp69yr7Cbow7jd5jS10IdgEDvwGPtmOv39yhktGBMjXv6M7g8qoMnk2K8FOD02XGSYuYVw==",
+  "dgSpecHash": "3L5PLOLOBJduL8L+2iM/nKCZ4L79OWV8LBCcQuSyweTXc+PNpiipfJE6p8/vFR7gcaMaGuNbqg+5ykOQjfRhTA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Biniyam\\Desktop\\AspClass\\Week_5_Astra\\ASPnet_Week1_Day5\\MovieShop\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Biniyam\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Biniyam\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.5\\microsoft.aspnetcore.cryptography.internal.5.0.5.nupkg.sha512",
+    "C:\\Users\\Biniyam\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.5\\microsoft.aspnetcore.cryptography.keyderivation.5.0.5.nupkg.sha512",
     "C:\\Users\\Biniyam\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Biniyam\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\Biniyam\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",

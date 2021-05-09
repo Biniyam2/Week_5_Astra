@@ -28,17 +28,17 @@ namespace ApplicationCore.Models.Response
         public string CreateBy { get; set; }
         public string UpdateBy { get; set; }
         public decimal Rating { get; set; }
-        public ICollection<MovieCrew> MovieCrews { get; set; }
-        public ICollection<MovieCast> MovieCasts { get; set; }
-        public ICollection<MovieGenre> MovieGenres { get; set; }
+        public IEnumerable<MovieCrew> MovieCrews { get; set; }
+        public IEnumerable<MovieCast> MovieCasts { get; set; }
+        public IEnumerable<MovieGenre> MovieGenres { get; set; }
 
-        public ICollection<Crew> Crews { get; set; }
-        public ICollection<Cast> Casts { get; set; }
-        public ICollection<Genre> Genres { get; set; }
+        public IEnumerable<Crew> Crews { get; set; }
+        public IEnumerable<Cast> Casts { get; set; }
+        public IEnumerable<Genre> Genres { get; set; }
 
-        public ICollection<Review> Reviews { get; set; }
-        public ICollection<Favorite> Favorites { get; set; }
-        public ICollection<Purchase> Purchases { get; set; }
-        public ICollection<Trailer> Trailers { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
+        public IEnumerable<Favorite> Favorites { get; set; }
+        public IEnumerable<Purchase> Purchases { get; set; }
+        public IEnumerable<Trailer> Trailers { get; set; }
     }
 }

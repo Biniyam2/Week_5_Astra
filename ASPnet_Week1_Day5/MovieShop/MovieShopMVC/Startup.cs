@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Infrastructure.Data;
 using Microsoft.OpenApi.Models;
 using ApplicationCore.RepositoryInterfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MovieShopMVC
 {
@@ -34,7 +35,15 @@ namespace MovieShopMVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            services.AddHttpContextAccessor();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+              .AddCookie(options =>
+              {
+                  options.Cookie.Name = "MovieShopAuthCookie";
+                  options.ExpireTimeSpan = TimeSpan.FromHours(2);
+                  options.LoginPath = "/Account/Login";
+              }
+              );
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "Bmes Api Core", Description = "It is a WEB Store (Back-end)", Version = "v1" });
@@ -43,6 +52,7 @@ namespace MovieShopMVC
             services.AddSession();
             services.AddDbContext<MovieShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieShowDB")));
             //************** Services **********************
+            services.AddTransient<ICurrentUserService, CurrentUserService>();
             services.AddTransient<ICastService, CastService>();
             services.AddTransient<ICrewService, CrewService>();
             services.AddTransient<IFavoriteService, FavoriteService>();
@@ -88,6 +98,7 @@ namespace MovieShopMVC
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

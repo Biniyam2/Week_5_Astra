@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationCore.RepositoryInterfaces
 {
-    public interface IMovieRepository :  IAsyncRepository<Movie>
+    public interface IMovieRepository : IAsyncRepository<Movie>
     {
         Task<IEnumerable<Movie>> GetTop30HighestRevenueMovies();
-
+        Task<IEnumerable<Movie>> GetByGenreAsync(int id);
     }
 }
