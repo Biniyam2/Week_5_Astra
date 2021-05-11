@@ -21,20 +21,26 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        public async void AddAsync()
+        public async Task<FavoriteResponse> AddAsync(FavoriteRequest favoriteRequest)
         {
-           FavoriteRequest favoriteRequest = new FavoriteRequest();
+           
             Favorite favorite = new Favorite() { 
               MovieId = favoriteRequest.MovieId,
               UserId = favoriteRequest.UserId
             };
-           await _repository.AddAsync(favorite);
-
+          var fav = await _repository.AddAsync(favorite);
+            FavoriteResponse favoriteResponse = new FavoriteResponse()
+            {
+                Id = fav.Id,
+                UserId = fav.UserId,
+                MovieId = fav.MovieId
+            };
+            return favoriteResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(FavoriteRequest favoriteRequest)
         {
-            FavoriteRequest favoriteRequest = new FavoriteRequest();
+           
             Favorite favorite = new Favorite()
             {
                 MovieId = favoriteRequest.MovieId,
@@ -71,15 +77,22 @@ namespace Infrastructure.Services
             return favoriteResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<FavoriteResponse> UpdateAsync(FavoriteRequest favoriteRequest)
         {
-            FavoriteRequest favoriteRequest = new FavoriteRequest();
+          
             Favorite favorite = new Favorite()
             {
                 MovieId = favoriteRequest.MovieId,
                 UserId = favoriteRequest.UserId
             };
-            await _repository.UpdateAsync(favorite);
+            var fav = await _repository.UpdateAsync(favorite);
+            FavoriteResponse favoriteResponse = new FavoriteResponse()
+            {
+                Id = fav.Id,
+                UserId = fav.UserId,
+                MovieId = fav.MovieId
+            };
+            return favoriteResponse;
         }
     }
 }

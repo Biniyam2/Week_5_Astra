@@ -36,5 +36,12 @@ namespace Infrastructure.Repositories
             var movie =await  _dbContext.MovieGenres.Include(mg => mg.Movie).Where(mg => mg.GenreId == id).Select(mg => mg.Movie).ToListAsync();
             return (IEnumerable<Movie>)movie;
         }
+
+        public async Task<IEnumerable<Movie>> GetRatedMovies()
+        {
+            var movies =await _dbContext.Movies.Include(m => m.Reviews).ToListAsync();
+            return movies;
+        }
+      
     }
 }

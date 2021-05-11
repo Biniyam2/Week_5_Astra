@@ -20,20 +20,29 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        public async void AddAsync()
+        public async Task<TrailerResponse> AddAsync(TrailerRequest trailerRequest)
         {
-            TrailerRequest trailerRequest = new TrailerRequest();
+            
             Trailer trailer = new Trailer() {
                 MovieId = trailerRequest.MovieId,
             TrailerUrl = trailerRequest.TrailerUrl,
             Name = trailerRequest.Name
             };
-            await _repository.AddAsync(trailer);
+            var tr = await _repository.AddAsync(trailer);
+            TrailerResponse trailerResponse = new TrailerResponse()
+            {
+                Id = tr.Id,
+                MovieId = tr.MovieId,
+                TrailerUrl = tr.TrailerUrl,
+                Name = tr.Name
+            };
+            return trailerResponse;
+
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(TrailerRequest trailerRequest)
         {
-            TrailerRequest trailerRequest = new TrailerRequest();
+         
             Trailer trailer = new Trailer()
             {
                 MovieId = trailerRequest.MovieId,
@@ -69,16 +78,25 @@ namespace Infrastructure.Services
             return trailerResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<TrailerResponse> UpdateAsync(TrailerRequest trailerRequest)
         {
-            TrailerRequest trailerRequest = new TrailerRequest();
+          
             Trailer trailer = new Trailer()
             {
                 MovieId = trailerRequest.MovieId,
                 TrailerUrl = trailerRequest.TrailerUrl,
                 Name = trailerRequest.Name
             };
-            await _repository.UpdateAsync(trailer);
+         
+            var tr = await _repository.UpdateAsync(trailer);
+            TrailerResponse trailerResponse = new TrailerResponse()
+            {
+                Id = tr.Id,
+                MovieId = tr.MovieId,
+                TrailerUrl = tr.TrailerUrl,
+                Name = tr.Name
+            };
+            return trailerResponse;
         }
     }
 }

@@ -20,20 +20,26 @@ namespace Infrastructure.Services
             _repository = repositery;
         }
 
-        public async void AddAsync()
+        public async Task<UserRoleResponse> AddAsync(UserRoleRequest userRoleRequest)
         {
-            UserRoleRequest userRoleRequest = new UserRoleRequest();
+           
             UserRole userRole = new UserRole()
             {
                 UserId = userRoleRequest.UserId,
                 RoleId = userRoleRequest.RoleId
             };
-            await _repository.AddAsync(userRole);
+            var ur = await _repository.AddAsync(userRole);
+            UserRoleResponse userResponse = new UserRoleResponse()
+            {
+                UserId = ur.UserId,
+                RoleId = ur.RoleId
+            };
+            return userResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(UserRoleRequest userRoleRequest)
         {
-            UserRoleRequest userRoleRequest = new UserRoleRequest();
+           
             UserRole userRole = new UserRole()
             {
                 UserId = userRoleRequest.UserId,
@@ -67,15 +73,21 @@ namespace Infrastructure.Services
             return userResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<UserRoleResponse> UpdateAsync(UserRoleRequest userRoleRequest)
         {
-            UserRoleRequest userRoleRequest = new UserRoleRequest();
+           
             UserRole userRole = new UserRole()
             {
                 UserId = userRoleRequest.UserId,
                 RoleId = userRoleRequest.RoleId
             };
-            await _repository.UpdateAsync(userRole);
+            var ur = await _repository.UpdateAsync(userRole);
+            UserRoleResponse userResponse = new UserRoleResponse()
+            {
+                UserId = ur.UserId,
+                RoleId = ur.RoleId
+            };
+            return userResponse;
         }
     }
 }

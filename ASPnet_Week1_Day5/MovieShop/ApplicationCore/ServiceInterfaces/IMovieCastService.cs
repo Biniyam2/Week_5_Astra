@@ -12,8 +12,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<MovieCastResponse>> GetAllMovieCastsAsync();
         public Task<MovieCastResponse> GetMovieCastByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<MovieCastResponse> AddAsync(MovieCastRequest movieCastRequest);
+        public void DeleteAsync(MovieCastRequest movieCastRequest);
+        public Task<MovieCastResponse> UpdateAsync(MovieCastRequest movieCastRequest);
     }
 }

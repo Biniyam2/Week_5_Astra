@@ -22,7 +22,7 @@ namespace Infrastructure.Services
             _castRepository = castRepository;
         }
 
-        public async void AddAsync(CastRequest castRequest)
+        public async Task<CastResponse> AddAsync(CastRequest castRequest)
         {
           
             Cast cast = new Cast() { 
@@ -31,10 +31,21 @@ namespace Infrastructure.Services
                   TmdbUrl = castRequest.TmdbUrl,
                   ProfilePath = castRequest.ProfilePath
             };
-          await  _castRepository.AddAsync(cast);
+         var castRes = await  _castRepository.AddAsync(cast);
+
+            CastResponse castResponse = new CastResponse()
+            {
+                Gender = castRes.Gender,
+                Name = castRes.Name,
+                TmdbUrl = castRes.TmdbUrl,
+                ProfilePath = castRes.ProfilePath,
+                MovieCasts = (ICollection<MovieCast>)castRes.MovieCasts.Where(mc => mc.CastId == cast.Id).Select(mc => mc.Movie)
+
+            };
+            return castResponse;
 
         }
-        public async void UpdateAsync(CastRequest castRequest)
+        public async Task<CastResponse> UpdateAsync(CastRequest castRequest)
         {
            
             Cast cast = new Cast()
@@ -44,7 +55,18 @@ namespace Infrastructure.Services
                 TmdbUrl = castRequest.TmdbUrl,
                 ProfilePath = castRequest.ProfilePath
             };
-            await _castRepository.UpdateAsync(cast);
+            var castRes = await _castRepository.UpdateAsync(cast);
+
+            CastResponse castResponse = new CastResponse()
+            {
+                Gender = castRes.Gender,
+                Name = castRes.Name,
+                TmdbUrl = castRes.TmdbUrl,
+                ProfilePath = castRes.ProfilePath,
+                MovieCasts = (ICollection<MovieCast>)castRes.MovieCasts.Where(mc => mc.CastId == cast.Id).Select(mc => mc.Movie)
+
+            };
+            return castResponse;
         }
         public async void DeleteAsync(CastRequest castRequest)
         {
@@ -57,6 +79,8 @@ namespace Infrastructure.Services
                 ProfilePath = castRequest.ProfilePath
             };
            await _castRepository.DeleteAsync(cast);
+
+          
         }
         public async Task<List<CastResponse>> GetAllCastsAsync()
         {

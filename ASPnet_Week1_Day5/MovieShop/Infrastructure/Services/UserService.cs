@@ -41,7 +41,7 @@ namespace Infrastructure.Services
                 numBytesRequested: 256 / 8));
             return hashed;
         }
-        public async void AddAsync(UserRequest userRequest)
+        public async Task<UserResponse> AddAsync(UserRequest userRequest)
         {
             bool exist = await _repository.GetExistsAsync(m => m.Email == userRequest.Email);
             var salt = CreateSalt();
@@ -63,7 +63,28 @@ namespace Infrastructure.Services
                     AccessFailedCount = userRequest.AccessFailedCount
 
                 };
-                await _repository.AddAsync(user);
+              var user2 =   await _repository.AddAsync(user);
+                UserResponse userResponses = new UserResponse()
+                {
+                    Id = user2.Id,
+                    FirstName = user2.FirstName,
+                    LastName = user2.LastName,
+                    DateOfBirth = user2.DateOfBirth,
+                    Email = user2.Email,
+                    HashedPassword = user.HashedPassword,
+                    Salt = user2.Salt,
+                    PhoneNumber = user2.PhoneNumber,
+                    TwoFactorEnabled = user2.TwoFactorEnabled,
+                    LastLoginDateTime = user2.LastLoginDateTime,
+                    LockoutEndDate = user2.LockoutEndDate,
+                    IsLocked = user2.IsLocked,
+                    AccessFailedCount = user2.AccessFailedCount,
+                    Purchases = user2.Purchases.Where(u => u.UserId == user.Id),
+                    Favorites = user2.Favorites.Where(u => u.UserId == user.Id),
+                    UserRoles = user2.UserRoles.Where(u => u.UserId == user.Id),
+                    Reviews = user2.Reviews.Where(u => u.UserId == user.Id)
+                };
+                return userResponses;
             }
             else
             {
@@ -93,6 +114,7 @@ namespace Infrastructure.Services
 
             };
             await _repository.DeleteAsync(user);
+           
         }
 
         public async Task<IEnumerable<UserResponse>> GetAllUsersAsync()
@@ -151,7 +173,7 @@ namespace Infrastructure.Services
             return userResponses;
         }
 
-        public async void UpdateAsync(UserRequest userRequest)
+        public async Task<UserResponse> UpdateAsync(UserRequest userRequest)
         {
             User user = new User()
             {
@@ -169,7 +191,29 @@ namespace Infrastructure.Services
                 IsLocked = userRequest.IsLocked,
                 AccessFailedCount = userRequest.AccessFailedCount
             };
-            await _repository.UpdateAsync(user);
+            
+            var user2 = await _repository.UpdateAsync(user);
+            UserResponse userResponses = new UserResponse()
+            {
+                Id = user2.Id,
+                FirstName = user2.FirstName,
+                LastName = user2.LastName,
+                DateOfBirth = user2.DateOfBirth,
+                Email = user2.Email,
+                HashedPassword = user.HashedPassword,
+                Salt = user2.Salt,
+                PhoneNumber = user2.PhoneNumber,
+                TwoFactorEnabled = user2.TwoFactorEnabled,
+                LastLoginDateTime = user2.LastLoginDateTime,
+                LockoutEndDate = user2.LockoutEndDate,
+                IsLocked = user2.IsLocked,
+                AccessFailedCount = user2.AccessFailedCount,
+                Purchases = user2.Purchases.Where(u => u.UserId == user.Id),
+                Favorites = user2.Favorites.Where(u => u.UserId == user.Id),
+                UserRoles = user2.UserRoles.Where(u => u.UserId == user.Id),
+                Reviews = user2.Reviews.Where(u => u.UserId == user.Id)
+            };
+            return userResponses;
         }
         public async Task<UserResponse> ValidateUser(string email, string password)
         {

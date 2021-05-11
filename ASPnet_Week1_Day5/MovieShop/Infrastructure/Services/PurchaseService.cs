@@ -20,9 +20,8 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        public async void AddAsync()
+        public async Task<PurchaseResponse> AddAsync(PurchaseRequest purchaseRequest)
         {
-            PurchaseRequest purchaseRequest = new PurchaseRequest();
             Purchase purchase = new Purchase() { 
                UserId = purchaseRequest.UserId,
                PurchaseNumber = purchaseRequest.PurchaseNumber,
@@ -30,12 +29,21 @@ namespace Infrastructure.Services
                PurchaseDateTime = purchaseRequest.PurchaseDateTime,
                MovieId =purchaseRequest.MovieId
             };
-            await _repository.AddAsync(purchase);
+            var p = await _repository.AddAsync(purchase);
+            PurchaseResponse purchaseResponse = new PurchaseResponse()
+            {
+                UserId = p.UserId,
+                PurchaseNumber = p.PurchaseNumber,
+                TotalPrice = p.TotalPrice,
+                PurchaseDateTime = p.PurchaseDateTime,
+                MovieId = p.MovieId
+            };
+            return purchaseResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(PurchaseRequest purchaseRequest)
         {
-            PurchaseRequest purchaseRequest = new PurchaseRequest();
+           
             Purchase purchase = new Purchase()
             {
                 UserId = purchaseRequest.UserId,
@@ -79,9 +87,8 @@ namespace Infrastructure.Services
             return purchaseResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<PurchaseResponse> UpdateAsync(PurchaseRequest purchaseRequest)
         {
-            PurchaseRequest purchaseRequest = new PurchaseRequest();
             Purchase purchase = new Purchase()
             {
                 UserId = purchaseRequest.UserId,
@@ -90,7 +97,16 @@ namespace Infrastructure.Services
                 PurchaseDateTime = purchaseRequest.PurchaseDateTime,
                 MovieId = purchaseRequest.MovieId
             };
-            await _repository.DeleteAsync(purchase);
+            var p = await _repository.UpdateAsync(purchase);
+            PurchaseResponse purchaseResponse = new PurchaseResponse()
+            {
+                UserId = p.UserId,
+                PurchaseNumber = p.PurchaseNumber,
+                TotalPrice = p.TotalPrice,
+                PurchaseDateTime = p.PurchaseDateTime,
+                MovieId = p.MovieId
+            };
+            return purchaseResponse;
         }
     }
 }

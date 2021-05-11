@@ -12,8 +12,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<ReviewResponse>> GetAllReviewsAsync();
         public Task<ReviewResponse> GetReviewByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<ReviewResponse> AddAsync(ReviewRequest reviewRequest);
+        public void DeleteAsync(ReviewRequest reviewRequest);
+        public Task<ReviewResponse> UpdateAsync(ReviewRequest reviewRequest);
     }
 }

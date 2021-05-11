@@ -21,21 +21,31 @@ namespace Infrastructure.Services
             _crewRepsoitory = crewRepsoitory;
         }
 
-        public async void AddAsync()
+        public async Task<CrewResponse> AddAsync(CrewRequest crewRequest)
         {
-            CrewRequest crewRequest = new CrewRequest();
+        
             Crew crew = new Crew() { 
                Name = crewRequest.Name,
                Gender = crewRequest.Gender,
                TmdbUrl = crewRequest.TmdbUrl,
                ProfilePath = crewRequest.ProfilePath
             };
-           await _crewRepsoitory.AddAsync(crew);
+            var cast = await _crewRepsoitory.AddAsync(crew);
+            CrewResponse castResponse = new CrewResponse()
+            {
+
+                Name = cast.Name,
+                Gender = cast.Gender,
+                TmdbUrl = cast.TmdbUrl,
+                ProfilePath = cast.ProfilePath,
+                MovieCrews = (ICollection<MovieCrew>)cast.MovieCrews.Where(mc => mc.CrewId == cast.Id).Select(mc => mc.Movie)
+            };
+            return castResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(CrewRequest crewRequest)
         {
-            CrewRequest crewRequest = new CrewRequest();
+          
             Crew crew = new Crew()
             {
                 Name = crewRequest.Name,
@@ -77,9 +87,8 @@ namespace Infrastructure.Services
             return castResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<CrewResponse> UpdateAsync(CrewRequest crewRequest)
         {
-            CrewRequest crewRequest = new CrewRequest();
             Crew crew = new Crew()
             {
                 Name = crewRequest.Name,
@@ -87,7 +96,17 @@ namespace Infrastructure.Services
                 TmdbUrl = crewRequest.TmdbUrl,
                 ProfilePath = crewRequest.ProfilePath
             };
-            await _crewRepsoitory.UpdateAsync(crew);
+            var cast = await _crewRepsoitory.UpdateAsync(crew);
+            CrewResponse castResponse = new CrewResponse()
+            {
+
+                Name = cast.Name,
+                Gender = cast.Gender,
+                TmdbUrl = cast.TmdbUrl,
+                ProfilePath = cast.ProfilePath,
+                MovieCrews = (ICollection<MovieCrew>)cast.MovieCrews.Where(mc => mc.CrewId == cast.Id).Select(mc => mc.Movie)
+            };
+            return castResponse;
         }
       
     }

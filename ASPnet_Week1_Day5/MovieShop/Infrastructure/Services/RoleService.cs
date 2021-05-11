@@ -20,18 +20,24 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        public async void AddAsync()
+        public async Task<RoleResponse> AddAsync(RoleRequest roleRequest)
         {
-            RoleRequest roleRequest = new RoleRequest();
             Role role = new Role() {
              Name = roleRequest.Name
+            
             };
-            await _repository.AddAsync(role);
+            var role2 = await _repository.AddAsync(role);
+            RoleResponse roleResponse = new RoleResponse()
+            {
+                Id = role2.Id,
+                Name = role2.Name,
+                UserRoles = (ICollection<UserRole>)role.UserRoles.Where(mc => mc.RoleId == role.Id).Select(r => r.User)
+            };
+            return roleResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(RoleRequest roleRequest)
         {
-            RoleRequest roleRequest = new RoleRequest();
             Role role = new Role()
             {
                 Name = roleRequest.Name
@@ -61,14 +67,21 @@ namespace Infrastructure.Services
             return roleResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<RoleResponse> UpdateAsync(RoleRequest roleRequest)
         {
-            RoleRequest roleRequest = new RoleRequest();
+            
             Role role = new Role()
             {
                 Name = roleRequest.Name
             };
-            await _repository.DeleteAsync(role);
+            var role2 = await _repository.UpdateAsync(role);
+            RoleResponse roleResponse = new RoleResponse()
+            {
+                Id = role2.Id,
+                Name = role2.Name,
+                UserRoles = (ICollection<UserRole>)role.UserRoles.Where(mc => mc.RoleId == role.Id).Select(r => r.User)
+            };
+            return roleResponse;
         }
     }
 }

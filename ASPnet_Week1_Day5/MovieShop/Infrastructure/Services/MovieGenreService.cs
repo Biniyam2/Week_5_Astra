@@ -21,21 +21,26 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        public async void AddAsync()
+        public async Task<MovieGenreResponse> AddAsync(MovieGenreRequest moviegenreRequest)
         {
-            MovieGenreRequest moviegenreRequest = new MovieGenreRequest();
 
             MovieGenre movieGenre = new MovieGenre()
             {
                 MovieId = moviegenreRequest.MovieId,
                 GenreId = moviegenreRequest.GenreId
             };
-            await _repository.AddAsync(movieGenre);
+            var mg = await _repository.AddAsync(movieGenre);
+            MovieGenreResponse movieGenreResponse = new MovieGenreResponse()
+            {
+                MovieId = mg.MovieId,
+                GenreId = mg.GenreId
+            };
+            return movieGenreResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(MovieGenreRequest moviegenreRequest)
         {
-            MovieGenreRequest moviegenreRequest = new MovieGenreRequest();
+             
 
             MovieGenre movieGenre = new MovieGenre()
             {
@@ -69,16 +74,20 @@ namespace Infrastructure.Services
             return movieGenreResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<MovieGenreResponse> UpdateAsync(MovieGenreRequest moviegenreRequest)
         {
-            MovieGenreRequest moviegenreRequest = new MovieGenreRequest();
-
             MovieGenre movieGenre = new MovieGenre()
             {
                 MovieId = moviegenreRequest.MovieId,
                 GenreId = moviegenreRequest.GenreId
             };
-            await _repository.UpdateAsync(movieGenre);
+            var mg = await _repository.UpdateAsync(movieGenre);
+            MovieGenreResponse movieGenreResponse = new MovieGenreResponse()
+            {
+                MovieId = mg.MovieId,
+                GenreId = mg.GenreId
+            };
+            return movieGenreResponse;
         }
     }
 }

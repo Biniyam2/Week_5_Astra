@@ -21,21 +21,29 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        public async void AddAsync()
+        public async Task<MovieCrewResponse> AddAsync(MovieCrewRequest movieCrewRequest)
         {
-            MovieCrewRequest movieCrewRequest = new MovieCrewRequest();
+          
             MovieCrew movieCrew = new MovieCrew() { 
             CrewId = movieCrewRequest.CrewId,
             MovieId = movieCrewRequest.MovieId,
             Department = movieCrewRequest.Department,
             Job = movieCrewRequest.Job
             };
-            await _repository.AddAsync(movieCrew);
+            var mc = await _repository.AddAsync(movieCrew);
+            MovieCrewResponse movieCrewResponse = new MovieCrewResponse()
+            {
+                MovieId = mc.MovieId,
+                CrewId = mc.CrewId,
+                Department = mc.Department,
+                Job = mc.Job
+            };
+            return movieCrewResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(MovieCrewRequest movieCrewRequest)
         {
-            MovieCrewRequest movieCrewRequest = new MovieCrewRequest();
+          
             MovieCrew movieCrew = new MovieCrew()
             {
                 CrewId = movieCrewRequest.CrewId,
@@ -75,9 +83,9 @@ namespace Infrastructure.Services
             return movieCrewResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<MovieCrewResponse> UpdateAsync(MovieCrewRequest movieCrewRequest)
         {
-            MovieCrewRequest movieCrewRequest = new MovieCrewRequest();
+             
             MovieCrew movieCrew = new MovieCrew()
             {
                 CrewId = movieCrewRequest.CrewId,
@@ -85,7 +93,15 @@ namespace Infrastructure.Services
                 Department = movieCrewRequest.Department,
                 Job = movieCrewRequest.Job
             };
-            await _repository.UpdateAsync(movieCrew);
+            var mc = await _repository.UpdateAsync(movieCrew);
+            MovieCrewResponse movieCrewResponse = new MovieCrewResponse()
+            {
+                MovieId = mc.MovieId,
+                CrewId = mc.CrewId,
+                Department = mc.Department,
+                Job = mc.Job
+            };
+            return movieCrewResponse;
         }
         
     }

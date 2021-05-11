@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationCore.Entites;
 
 namespace ApplicationCore.ServiceInterfaces
 {
@@ -12,8 +13,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<UserRoleResponse>> GetAllUserRolesAsync();
         public Task<UserRoleResponse> GetUserRoleByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<UserRoleResponse> AddAsync(UserRoleRequest roleRequest);
+        public void DeleteAsync(UserRoleRequest roleRequest);
+        public Task<UserRoleResponse> UpdateAsync(UserRoleRequest roleRequest);
     }
 }

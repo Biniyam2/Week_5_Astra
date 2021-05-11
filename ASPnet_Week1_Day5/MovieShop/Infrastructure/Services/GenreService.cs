@@ -20,7 +20,7 @@ namespace Infrastructure.Services
             _genreRepository = genreRepository;
         }
 
-        public async void AddAsync(GenreRequest genreRequest)
+        public async Task<GenreResponse> AddAsync(GenreRequest genreRequest)
         {
            
 
@@ -28,7 +28,13 @@ namespace Infrastructure.Services
             {
                 Name = genreRequest.Name
             };
-            await _genreRepository.AddAsync(genre);
+            var gen = await _genreRepository.AddAsync(genre);
+            GenreResponse genreResponse = new GenreResponse()
+            {
+                Id = gen.Id,
+                Name = gen.Name
+            };
+            return genreResponse;
         }
 
         public async void DeleteAsync(GenreRequest genreRequest)
@@ -40,6 +46,7 @@ namespace Infrastructure.Services
                 Name = genreRequest.Name
             };
             await _genreRepository.DeleteAsync(genre);
+       
         }
 
         public async Task<List<GenreResponse>> GetAllGenresAsync()
@@ -50,7 +57,8 @@ namespace Infrastructure.Services
             {
                 genreResponses.Add(new GenreResponse {
                     Id = item.Id,
-                    Name = item.Name
+                    Name = item.Name,
+                    MovieGenres = item.MovieGenres
                 });
             }
             return genreResponses;
@@ -67,16 +75,22 @@ namespace Infrastructure.Services
             return genreResponse;
         }
 
-        public async void UpdateAsync(GenreRequest genreRequest)
+        public async Task<GenreResponse> UpdateAsync(GenreRequest genreRequest)
         {
-            
-
             Genre genre = new Genre()
             {
                 Name = genreRequest.Name
             };
-            await _genreRepository.UpdateAsync(genre);
+            var gen = await _genreRepository.UpdateAsync(genre);
+            GenreResponse genreResponse = new GenreResponse()
+            {
+                Id = gen.Id,
+                Name = gen.Name
+            };
+            return genreResponse;
         }
+
+
     }
 }
 

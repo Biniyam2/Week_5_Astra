@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationCore.Entites;
 
 namespace ApplicationCore.ServiceInterfaces
 {
@@ -12,8 +13,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<GenreResponse>> GetAllGenresAsync();
         public Task<GenreResponse> GetGenreByIdAsync(int id);
-        public void AddAsync(GenreRequest genreRequest);
+        public Task<GenreResponse> AddAsync(GenreRequest genreRequest);
         public void DeleteAsync(GenreRequest genreRequest);
-        public void UpdateAsync(GenreRequest genreRequest);
+        public Task<GenreResponse> UpdateAsync(GenreRequest genreRequest);
     }
 }

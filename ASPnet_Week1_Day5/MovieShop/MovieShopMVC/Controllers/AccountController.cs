@@ -33,7 +33,7 @@ namespace MovieShop.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterPage(UserRequest userRequest)
         {
-            _userService.AddAsync(userRequest);
+            await _userService.AddAsync(userRequest);
             return View();
         }
         [HttpGet]
@@ -90,16 +90,16 @@ namespace MovieShop.MVC.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> EditProfile(/*int id*/)
+        public async Task<IActionResult> EditProfile(int id)
         {
-            // call the database and get the user information and fill that in textboxes so that user can edit and save info
-            //var user = await _userService.GetUserByIdAsync(id);
-            return View(/*user*/);
+            //call the database and get the user information and fill that in textboxes so that user can edit and save info
+           var user = await _userService.GetUserByIdAsync(id);
+            return View(user);
         }
         [HttpPut]
         public async Task<IActionResult> EditProfile(UserRequest userRequest)
         {
-            _userService.UpdateAsync(userRequest);
+            await _userService.UpdateAsync(userRequest);
             return View();
         }
 

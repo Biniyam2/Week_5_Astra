@@ -44,11 +44,7 @@ namespace MovieShopMVC
                   options.LoginPath = "/Account/Login";
               }
               );
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "Bmes Api Core", Description = "It is a WEB Store (Back-end)", Version = "v1" });
-               
-            });
+            
             services.AddSession();
             services.AddDbContext<MovieShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MovieShowDB")));
             //************** Services **********************
@@ -99,11 +95,7 @@ namespace MovieShopMVC
                 app.UseHsts();
             }
             
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Bmes Api Core");
-            });
+        
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();

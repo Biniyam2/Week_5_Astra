@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationCore.Entites;
 
 namespace ApplicationCore.ServiceInterfaces
 {
@@ -14,8 +15,8 @@ namespace ApplicationCore.ServiceInterfaces
         public Task<IEnumerable<UserResponse>> GetAllUsersAsync();
         public Task<UserResponse> GetUserByIdAsync(int id);
         public Task<UserResponse> GetUserByEmailAsync(string email);
-        public void AddAsync(UserRequest userRequest);
+        public Task<UserResponse> AddAsync(UserRequest userRequest);
         public void DeleteAsync(UserRequest userRequest);
-        public void UpdateAsync(UserRequest userRequest);
+        public Task<UserResponse> UpdateAsync(UserRequest userRequest);
     }
 }

@@ -43,7 +43,7 @@ namespace MovieShop.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(MovieRequest movieRequest)
         {
-            _movieService.AddAsync(movieRequest);
+            await _movieService.AddAsync(movieRequest);
             return RedirectToAction("Index", "Home");
         }
         [HttpGet]
@@ -53,9 +53,9 @@ namespace MovieShop.MVC.Controllers
         }
 
         [HttpPut]
-        public IActionResult Edit(MovieRequest movieRequest)
+        public async Task< IActionResult> Edit(MovieRequest movieRequest)
         {
-            _movieService.UpdateAsync(movieRequest);
+            await _movieService.UpdateAsync(movieRequest);
             return RedirectToAction("Index", "Home");
         }
 
@@ -66,7 +66,7 @@ namespace MovieShop.MVC.Controllers
         }
 
         [HttpDelete]
-        public IActionResult Delete(MovieRequest movieRequest)
+        public async Task< IActionResult> Delete(MovieRequest movieRequest)
         {
             _movieService.DeleteAsync(movieRequest);
             return RedirectToAction("Index", "Home");

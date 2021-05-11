@@ -20,21 +20,29 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        public async void AddAsync()
+        public async Task<ReviewResponse> AddAsync(ReviewRequest rev)
         {
-            var rev = new ReviewRequest();
+        
             Review review = new Review() {
             MovieId = rev.MovieId,
             UserId = rev.UserId,
             Rating = rev.Rating,
             ReviewText = rev.ReviewText
             };
-            await _repository.AddAsync(review);
+           var rev2 = await _repository.AddAsync(review);
+            ReviewResponse reviewResponse = new ReviewResponse()
+            {
+               
+                MovieId = rev2.MovieId,
+                UserId = rev2.UserId,
+                Rating = rev2.Rating,
+                ReviewText = rev2.ReviewText
+            };
+            return reviewResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(ReviewRequest rev)
         {
-            var rev = new ReviewRequest();
             Review review = new Review()
             {
                 MovieId = rev.MovieId,
@@ -73,9 +81,9 @@ namespace Infrastructure.Services
             return reviewResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<ReviewResponse> UpdateAsync(ReviewRequest rev)
         {
-            var rev = new ReviewRequest();
+           
             Review review = new Review()
             {
                 MovieId = rev.MovieId,
@@ -83,7 +91,15 @@ namespace Infrastructure.Services
                 Rating = rev.Rating,
                 ReviewText = rev.ReviewText
             };
-            await _repository.UpdateAsync(review);
+            var rev2 = await _repository.UpdateAsync(review);
+            ReviewResponse reviewResponse = new ReviewResponse()
+            {
+                MovieId = rev2.MovieId,
+                UserId = rev2.UserId,
+                Rating = rev2.Rating,
+                ReviewText = rev2.ReviewText
+            };
+            return reviewResponse;
         }
     }
 }

@@ -12,8 +12,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<RoleResponse>> GetAllRolesAsync();
         public Task<RoleResponse> GetRoleByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<RoleResponse> AddAsync(RoleRequest roleRequest);
+        public void DeleteAsync(RoleRequest roleRequest);
+        public Task<RoleResponse> UpdateAsync(RoleRequest roleRequest);
     }
 }

@@ -20,20 +20,27 @@ namespace Infrastructure.Services
             _repository = repository;
         }
 
-        public async void AddAsync()
+        public async Task<MovieCastResponse> AddAsync(MovieCastRequest movieCastRequest)
         {
-            MovieCastRequest movieCastRequest = new MovieCastRequest();
+            // = new MovieCastRequest();
             MovieCast movieCast = new MovieCast() { 
              MovieId = movieCastRequest.MovieId,
              CastId = movieCastRequest.CastId,
              Character = movieCastRequest.Character
             };
-            await _repository.AddAsync(movieCast);
+            var mc = await _repository.AddAsync(movieCast);
+            MovieCastResponse movieCastResponse = new MovieCastResponse()
+            {
+                MovieId = mc.MovieId,
+                CastId = mc.CastId,
+                Character = mc.Character
+            };
+            return movieCastResponse;
         }
 
-        public async void DeleteAsync()
+        public async void DeleteAsync(MovieCastRequest movieCastRequest)
         {
-            MovieCastRequest movieCastRequest = new MovieCastRequest();
+          
             MovieCast movieCast = new MovieCast()
             {
                 MovieId = movieCastRequest.MovieId,
@@ -69,16 +76,23 @@ namespace Infrastructure.Services
             return movieCastResponse;
         }
 
-        public async void UpdateAsync()
+        public async Task<MovieCastResponse> UpdateAsync(MovieCastRequest movieCastRequest)
         {
-            MovieCastRequest movieCastRequest = new MovieCastRequest();
+            
             MovieCast movieCast = new MovieCast()
             {
                 MovieId = movieCastRequest.MovieId,
                 CastId = movieCastRequest.CastId,
                 Character = movieCastRequest.Character
             };
-            await _repository.UpdateAsync(movieCast);
+            var mc = await _repository.UpdateAsync(movieCast);
+            MovieCastResponse movieCastResponse = new MovieCastResponse()
+            {
+                MovieId = mc.MovieId,
+                CastId = mc.CastId,
+                Character = mc.Character
+            };
+            return movieCastResponse;
         }
     }
 }

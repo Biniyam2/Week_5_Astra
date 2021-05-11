@@ -12,8 +12,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<PurchaseResponse>> GetAllPurchasesAsync();
         public Task<PurchaseResponse> GetPurchaseByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<PurchaseResponse> AddAsync(PurchaseRequest purchaseRequest);
+        public void DeleteAsync(PurchaseRequest purchaseRequest);
+        public Task<PurchaseResponse> UpdateAsync(PurchaseRequest purchaseRequest);
     }
 }

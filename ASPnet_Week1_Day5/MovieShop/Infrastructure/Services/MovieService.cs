@@ -30,9 +30,27 @@ namespace Infrastructure.Services
                 movieResponses.Add(new MovieResponse {
 
                     Id = movie.Id,
+                    OverView = movie.OverView,
+                    Tagline = movie.Tagline,
+                    Revenue = movie.Revenue,
+                    ImdbUrl = movie.ImdbUrl,
+                    TmdbUrl = movie.TmdbUrl,
                     PosterUrl = movie.PosterUrl,
+                    BackdropUrl = movie.BackdropUrl,
+                    OriginalLanguage = movie.OriginalLanguage,
+                    ReleaseDate = movie.ReleaseDate,
+                    RunTime = movie.RunTime,
+                    Price = movie.Price,
+                    CreateDate = movie.CreateDate,
+                    UpdateDate = movie.UpdateDate,
+                    CreateBy = movie.CreateBy,
+                    UpdateBy = movie.UpdateBy,
+                    Budget = movie.Budget,
                     Title = movie.Title,
-
+                   // Rating = movie.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
+                    //Genres = movie.MovieGenres.Select(mc => mc.Genre),
+                    //Casts = movie.MovieCasts.Select(mc => mc.Cast),
+                    //Reviews = movie.Reviews.Where(r => r.MovieId == movie.Id)
                 });
             }
             return movieResponses;
@@ -63,14 +81,15 @@ namespace Infrastructure.Services
                 Budget = movie.Budget,
                 Title = movie.Title,
                 Rating = movie.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
-                Genres = movie.MovieGenres.Select(mc => mc.Genre) ,
-                Casts = movie.MovieCasts.Select(mc => mc.Cast) 
+                Genres = movie.MovieGenres.Select(mc => mc.Genre),
+                Casts = movie.MovieCasts.Select(mc => mc.Cast),
+                Reviews = movie.Reviews.Where(r => r.MovieId == movie.Id)
 
             };
 
             return movieResponse;
         }
-        public async void AddAsync(MovieRequest movieRequest)
+        public async Task<MovieResponse> AddAsync(MovieRequest movieRequest)
         {
 
             Movie movie = new Movie() {
@@ -92,7 +111,36 @@ namespace Infrastructure.Services
                 Budget = movieRequest.Budget,
                 Title = movieRequest.Title
             };
-            await _movieRepository.AddAsync(movie);
+            var movie2 = await _movieRepository.AddAsync(movie); ;
+
+            MovieResponse movieResponse = new MovieResponse()
+            {
+
+                Id = movie2.Id,
+                OverView = movie2.OverView,
+                Tagline = movie2.Tagline,
+                Revenue = movie2.Revenue,
+                ImdbUrl = movie2.ImdbUrl,
+                TmdbUrl = movie2.TmdbUrl,
+                PosterUrl = movie2.PosterUrl,
+                BackdropUrl = movie2.BackdropUrl,
+                OriginalLanguage = movie2.OriginalLanguage,
+                ReleaseDate = movie2.ReleaseDate,
+                RunTime = movie2.RunTime,
+                Price = movie2.Price,
+                CreateDate = movie2.CreateDate,
+                UpdateDate = movie2.UpdateDate,
+                CreateBy = movie2.CreateBy,
+                UpdateBy = movie2.UpdateBy,
+                Budget = movie2.Budget,
+                Title = movie2.Title,
+                Rating = movie2.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
+                Genres = movie2.MovieGenres.Select(mc => mc.Genre),
+                Casts = movie2.MovieCasts.Select(mc => mc.Cast)
+
+            };
+
+            return movieResponse;
         }
         public async void DeleteAsync(MovieRequest movieRequest)
         {
@@ -120,7 +168,7 @@ namespace Infrastructure.Services
             };
             await _movieRepository.DeleteAsync(movie);
         }
-        public async void UpdateAsync(MovieRequest movieRequest)
+        public async Task<MovieResponse> UpdateAsync(MovieRequest movieRequest)
         {
 
             Movie movie = new Movie()
@@ -145,7 +193,36 @@ namespace Infrastructure.Services
                 Title = movieRequest.Title
             };
 
-            await _movieRepository.UpdateAsync(movie);
+            var movie2 = await _movieRepository.UpdateAsync(movie); ;
+
+            MovieResponse movieResponse = new MovieResponse()
+            {
+
+                Id = movie2.Id,
+                OverView = movie2.OverView,
+                Tagline = movie2.Tagline,
+                Revenue = movie2.Revenue,
+                ImdbUrl = movie2.ImdbUrl,
+                TmdbUrl = movie2.TmdbUrl,
+                PosterUrl = movie2.PosterUrl,
+                BackdropUrl = movie2.BackdropUrl,
+                OriginalLanguage = movie2.OriginalLanguage,
+                ReleaseDate = movie2.ReleaseDate,
+                RunTime = movie2.RunTime,
+                Price = movie2.Price,
+                CreateDate = movie2.CreateDate,
+                UpdateDate = movie2.UpdateDate,
+                CreateBy = movie2.CreateBy,
+                UpdateBy = movie2.UpdateBy,
+                Budget = movie2.Budget,
+                Title = movie2.Title,
+                Rating = movie2.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
+                Genres = movie2.MovieGenres.Select(mc => mc.Genre),
+                Casts = movie2.MovieCasts.Select(mc => mc.Cast)
+
+            };
+
+            return movieResponse;
         }
         public async Task<List<MovieResponse>> GetTop30RevenueMovie()
         {
@@ -212,5 +289,43 @@ namespace Infrastructure.Services
 
             return movieResponses;
         }
+
+        public async Task<List<MovieResponse>> GetTopRatedMovies()
+        {
+            var movies = await _movieRepository.GetRatedMovies();
+
+            var topMovies = new List<MovieResponse>();
+            foreach (var movie in movies)
+            {
+                topMovies.Add(new MovieResponse
+                {
+                    Id = movie.Id,
+                    OverView = movie.OverView,
+                    Tagline = movie.Tagline,
+                    Revenue = movie.Revenue,
+                    ImdbUrl = movie.ImdbUrl,
+                    TmdbUrl = movie.TmdbUrl,
+                    PosterUrl = movie.PosterUrl,
+                    BackdropUrl = movie.BackdropUrl,
+                    OriginalLanguage = movie.OriginalLanguage,
+                    ReleaseDate = movie.ReleaseDate,
+                    RunTime = movie.RunTime,
+                    Price = movie.Price,
+                    CreateDate = movie.CreateDate,
+                    UpdateDate = movie.UpdateDate,
+                    CreateBy = movie.CreateBy,
+                    UpdateBy = movie.UpdateBy,
+                    Budget = movie.Budget,
+                    Title = movie.Title,
+                    Rating = movie.Reviews.Where(r => r.MovieId == movie.Id).Average( r => r.Rating)
+                }) ;
+            }
+
+            return topMovies;
+        }
+
+      
+
+      
     }   
 }

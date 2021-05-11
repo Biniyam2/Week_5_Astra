@@ -12,8 +12,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<TrailerResponse>> GetAllTrailersAsync();
         public Task<TrailerResponse> GetTrailerByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<TrailerResponse> AddAsync(TrailerRequest trailerRequest);
+        public void DeleteAsync(TrailerRequest trailerRequest);
+        public Task<TrailerResponse> UpdateAsync(TrailerRequest trailerRequest);
     }
 }

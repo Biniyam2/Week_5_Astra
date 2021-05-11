@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationCore.Entites;
 
 namespace ApplicationCore.ServiceInterfaces
 {
@@ -12,8 +13,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<FavoriteResponse>> GetAllFavoritesAsync();
         public Task<FavoriteResponse> GetFavoriteByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<FavoriteResponse> AddAsync(FavoriteRequest favoriteRequest);
+        public void DeleteAsync(FavoriteRequest favoriteRequest);
+        public Task<FavoriteResponse> UpdateAsync(FavoriteRequest favoriteRequest);
     }
 }

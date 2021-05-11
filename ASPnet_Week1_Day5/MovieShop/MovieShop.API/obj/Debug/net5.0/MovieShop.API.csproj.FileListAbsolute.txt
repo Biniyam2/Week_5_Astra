@@ -120,3 +120,9 @@ C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\Movie
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\obj\Debug\net5.0\ref\MovieShop.API.dll
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\obj\Debug\net5.0\MovieShop.API.pdb
 C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\obj\Debug\net5.0\MovieShop.API.genruntimeconfig.cache
+C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\bin\Debug\net5.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\bin\Debug\net5.0\ApplicationCore.dll
+C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\bin\Debug\net5.0\Infrastructure.dll
+C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\bin\Debug\net5.0\ApplicationCore.pdb
+C:\Users\Biniyam\Desktop\AspClass\Week_5_Astra\ASPnet_Week1_Day5\MovieShop\MovieShop.API\bin\Debug\net5.0\Infrastructure.pdb

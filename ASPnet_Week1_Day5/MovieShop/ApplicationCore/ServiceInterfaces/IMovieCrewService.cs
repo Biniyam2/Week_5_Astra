@@ -12,8 +12,8 @@ namespace ApplicationCore.ServiceInterfaces
     {
         public Task<List<MovieCrewResponse>> GetAllMovieCrewsAsync();
         public Task<MovieCrewResponse> GetMovieCrewByIdAsync(int id);
-        public void AddAsync();
-        public void DeleteAsync();
-        public void UpdateAsync();
+        public Task<MovieCrewResponse> AddAsync(MovieCrewRequest movieCrewRequest);
+        public void DeleteAsync(MovieCrewRequest movieCrewRequest);
+        public Task<MovieCrewResponse> UpdateAsync(MovieCrewRequest movieCrewRequest);
     }
 }
