@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using ApplicationCore.Exceptions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -34,12 +35,12 @@ namespace MovieShop.API.Middlewares
         {
             switch(ex)
             {
-                //case ConflictException conflictException:
-                //    httpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
-                //    break;
-                //case NotFoundException notFoundException:
-                //    httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                //    break;
+                case ConflictException conflictException:
+                    httpContext.Response.StatusCode = (int)HttpStatusCode.Conflict;
+                    break;
+                case NotFoundException notFoundException:
+                    httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    break;
                 case UnauthorizedAccessException unauthorized:
                     httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                     break;
