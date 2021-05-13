@@ -34,7 +34,7 @@ namespace Infrastructure.Repositories
         public async Task<IEnumerable<Movie>> GetByGenreAsync(int id)
         {
             var movie =await  _dbContext.MovieGenres.Include(mg => mg.Movie).Where(mg => mg.GenreId == id).Select(mg => mg.Movie).ToListAsync();
-            return (IEnumerable<Movie>)movie;
+            return movie;
         }
 
         public async Task<IEnumerable<Movie>> GetRatedMovies()

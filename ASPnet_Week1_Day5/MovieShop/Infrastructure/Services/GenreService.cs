@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class GenreService : IGenreService
+    public class GenreService : ResponseConverter, IGenreService
     {
         private readonly IGenreRepository _genreRepository;
         public GenreService(IGenreRepository genreRepository)
@@ -58,7 +58,7 @@ namespace Infrastructure.Services
                 genreResponses.Add(new GenreResponse {
                     Id = item.Id,
                     Name = item.Name,
-                    MovieGenres = item.MovieGenres
+                    
                 });
             }
             return genreResponses;
@@ -70,7 +70,8 @@ namespace Infrastructure.Services
             GenreResponse genreResponse = new GenreResponse()
             {
                 Id = gen.Id,
-                Name = gen.Name
+                Name = gen.Name,
+                MovieGenres =  MovieGenresResponses( gen.MovieGenres )
             };
             return genreResponse;
         }

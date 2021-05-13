@@ -9,10 +9,11 @@ using ApplicationCore.Models.Request;
 using ApplicationCore.ServiceInterfaces;
 using ApplicationCore.Entites;
 using ApplicationCore.RepositoryInterfaces;
+using Infrastructure.Services;
 
 namespace Infrastructure.Services
 {
-    public class MovieService : IMovieService
+    public class MovieService : ResponseConverter , IMovieService 
     {
         private readonly IMovieRepository _movieRepository;
 
@@ -47,10 +48,7 @@ namespace Infrastructure.Services
                     UpdateBy = movie.UpdateBy,
                     Budget = movie.Budget,
                     Title = movie.Title,
-                   // Rating = movie.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
-                    //Genres = movie.MovieGenres.Select(mc => mc.Genre),
-                    //Casts = movie.MovieCasts.Select(mc => mc.Cast),
-                    //Reviews = movie.Reviews.Where(r => r.MovieId == movie.Id)
+                    Rating = ReviewsResponses(movie.Reviews).Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
                 });
             }
             return movieResponses;
@@ -80,15 +78,23 @@ namespace Infrastructure.Services
                 UpdateBy = movie.UpdateBy,
                 Budget = movie.Budget,
                 Title = movie.Title,
-                Rating = movie.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
-                Genres = movie.MovieGenres.Select(mc => mc.Genre),
-                Casts = movie.MovieCasts.Select(mc => mc.Cast),
-                Reviews = movie.Reviews.Where(r => r.MovieId == movie.Id)
+                Rating = ReviewsResponses( movie.Reviews ) .Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
+                Genres =   GenreResponses(   movie.MovieGenres.Select(mc => mc.Genre).ToList()),
+                Casts =   CastResponses( movie.MovieCasts.Select(mc =>  mc.Cast ).ToList()),
+               Reviews = ReviewsResponses(movie.Reviews).Where(r => r.MovieId == movie.Id).ToList()
 
             };
 
             return movieResponse;
         }
+       
+     
+
+
+
+
+
+
         public async Task<MovieResponse> AddAsync(MovieRequest movieRequest)
         {
 
@@ -134,9 +140,6 @@ namespace Infrastructure.Services
                 UpdateBy = movie2.UpdateBy,
                 Budget = movie2.Budget,
                 Title = movie2.Title,
-                Rating = movie2.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
-                Genres = movie2.MovieGenres.Select(mc => mc.Genre),
-                Casts = movie2.MovieCasts.Select(mc => mc.Cast)
 
             };
 
@@ -217,8 +220,8 @@ namespace Infrastructure.Services
                 Budget = movie2.Budget,
                 Title = movie2.Title,
                 Rating = movie2.Reviews.Where(r => r.MovieId == movie.Id).Average(r => r.Rating),
-                Genres = movie2.MovieGenres.Select(mc => mc.Genre),
-                Casts = movie2.MovieCasts.Select(mc => mc.Cast)
+                Genres = (IEnumerable<GenreResponse>)movie2.MovieGenres.Select(mc => mc.Genre),
+                Casts = (IEnumerable<CastResponse>)movie2.MovieCasts.Select(mc => mc.Cast)
 
             };
 
@@ -293,7 +296,7 @@ namespace Infrastructure.Services
         public async Task<List<MovieResponse>> GetTopRatedMovies()
         {
             var movies = await _movieRepository.GetRatedMovies();
-
+            int x;
             var topMovies = new List<MovieResponse>();
             foreach (var movie in movies)
             {
@@ -317,11 +320,13 @@ namespace Infrastructure.Services
                     UpdateBy = movie.UpdateBy,
                     Budget = movie.Budget,
                     Title = movie.Title,
-                    Rating = movie.Reviews.Where(r => r.MovieId == movie.Id).Average( r => r.Rating)
+                    Rating = ReviewsResponses(movie.Reviews).Where(r => r.MovieId == movie.Id).Average( r => r.Rating)
                 }) ;
+                if (topMovies.Count() == 40)
+                    break;
             }
 
-            return topMovies;
+            return topMovies.OrderByDescending( t => t.Rating).ToList();
         }
 
       

@@ -14,7 +14,7 @@ using System.Security.Cryptography;
 
 namespace Infrastructure.Services
 {
-    public class UserService : IUserService
+    public class UserService :ResponseConverter, IUserService
     {
         private readonly IUserRepository _repository;
         public UserService(IUserRepository repository)
@@ -79,10 +79,6 @@ namespace Infrastructure.Services
                     LockoutEndDate = user2.LockoutEndDate,
                     IsLocked = user2.IsLocked,
                     AccessFailedCount = user2.AccessFailedCount,
-                    Purchases = user2.Purchases.Where(u => u.UserId == user.Id),
-                    Favorites = user2.Favorites.Where(u => u.UserId == user.Id),
-                    UserRoles = user2.UserRoles.Where(u => u.UserId == user.Id),
-                    Reviews = user2.Reviews.Where(u => u.UserId == user.Id)
                 };
                 return userResponses;
             }
@@ -136,11 +132,7 @@ namespace Infrastructure.Services
                     LastLoginDateTime = item.LastLoginDateTime,
                     LockoutEndDate = item.LockoutEndDate,
                     IsLocked = item.IsLocked,
-                    AccessFailedCount = item.AccessFailedCount,
-                    Purchases = item.Purchases.Where(u => u.UserId == item.Id) ,
-                    Favorites = item.Favorites.Where(u => u.UserId == item.Id),
-                    UserRoles = item.UserRoles.Where(u => u.UserId == item.Id) ,
-                    Reviews = item.Reviews.Where(u => u.UserId == item.Id) 
+                    AccessFailedCount = item.AccessFailedCount 
 
                 });
               
@@ -165,10 +157,10 @@ namespace Infrastructure.Services
                 LockoutEndDate = user.LockoutEndDate,
                 IsLocked = user.IsLocked,
                 AccessFailedCount = user.AccessFailedCount,
-                Purchases = user.Purchases.Where(u => u.UserId == user.Id) ,
-                Favorites = user.Favorites.Where(u => u.UserId == user.Id) ,
-                UserRoles = user.UserRoles.Where(u => u.UserId == user.Id) ,
-                Reviews= user.Reviews.Where(u => u.UserId == user.Id) 
+                Purchases = PurchasesResponses( user.Purchases.Where(u => u.UserId == user.Id)) ,
+                Favorites = FavoriteResponses( user.Favorites.Where(u => u.UserId == user.Id) ),
+                Roles = RolesResponses( user.UserRoles.Where(ur => ur.UserId == user.Id).Select(u => u.Role).ToList() ),
+                Reviews= ReviewsResponses( user.Reviews.Where(u => u.UserId == user.Id).ToList() )
             };
             return userResponses;
         }
@@ -208,10 +200,10 @@ namespace Infrastructure.Services
                 LockoutEndDate = user2.LockoutEndDate,
                 IsLocked = user2.IsLocked,
                 AccessFailedCount = user2.AccessFailedCount,
-                Purchases = user2.Purchases.Where(u => u.UserId == user.Id),
-                Favorites = user2.Favorites.Where(u => u.UserId == user.Id),
-                UserRoles = user2.UserRoles.Where(u => u.UserId == user.Id),
-                Reviews = user2.Reviews.Where(u => u.UserId == user.Id)
+                Purchases = PurchasesResponses (user2.Purchases.Where(u => u.UserId == user2.Id).ToList()),
+                Favorites = FavoriteResponses(user2.Favorites.Where(u => u.UserId == user2.Id)),
+                Roles = RolesResponses(user2.UserRoles.Where(ur => ur.UserId == user2.Id).Select(u => u.Role).ToList()),
+                Reviews = ReviewsResponses(user2.Reviews.Where(u => u.UserId == user2.Id).ToList())
             };
             return userResponses;
         }

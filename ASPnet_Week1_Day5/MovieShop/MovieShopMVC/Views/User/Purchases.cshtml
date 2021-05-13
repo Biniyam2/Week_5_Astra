@@ -1,14 +1,17 @@
-﻿@model IEnumerable<ApplicationCore.Entites.Purchase>
+﻿@model IEnumerable< ApplicationCore.Models.Response.PurchaseResponse>
 
 @{
     ViewData["Title"] = "Purchases";
 }
 
-<h1>AllPurchases</h1>
+<h1>Purchases</h1>
 
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.PurchaseNumber)
             </th>
@@ -19,7 +22,7 @@
                 @Html.DisplayNameFor(model => model.PurchaseDateTime)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movie.Title)
+                @Html.DisplayNameFor(model => model.Movie.Select(m => m.Title))
             </th>
         </tr>
     </thead>
@@ -27,6 +30,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    <a asp-controller="Account" asp-action="Profile" asp-route-id="@item.UserId"> @Html.DisplayFor(modelItem => item.User.Where(u => u.Id == item.UserId).Select(u => u.FirstName) + " " + item.User.Where(u => u.Id == item.UserId).Select(u => u.LastName)) </a>
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.PurchaseNumber)
                 </td>

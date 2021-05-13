@@ -17,6 +17,10 @@ namespace Infrastructure.Repositories
         {
          
         }
-       
+        public override async Task<Cast> GetByIdAsync(int id)
+        {
+            var entity = await _dbContext.Casts.Include(c => c.MovieCasts).FirstOrDefaultAsync(g => g.Id == id);
+            return entity;
+        }
     }
 }

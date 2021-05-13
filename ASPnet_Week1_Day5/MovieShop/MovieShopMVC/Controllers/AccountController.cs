@@ -81,7 +81,8 @@ namespace MovieShop.MVC.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        
+       // [Authorize]
         public async Task<IActionResult> Profile(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
@@ -89,12 +90,12 @@ namespace MovieShop.MVC.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+       // [Authorize]
         public async Task<IActionResult> EditProfile(int id)
         {
             //call the database and get the user information and fill that in textboxes so that user can edit and save info
-           var user = await _userService.GetUserByIdAsync(id);
-            return View(user);
+            await _userService.GetUserByIdAsync(id);
+            return View();
         }
         [HttpPut]
         public async Task<IActionResult> EditProfile(UserRequest userRequest)

@@ -11,6 +11,7 @@ namespace ApplicationCore.Models.Response
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<MovieGenre> MovieGenres { get; set; }
+        public IEnumerable<MovieGenreResponse> MovieGenres { get; set; }
+        public IEnumerable<MovieResponse> Movie { get; set; }
     }
 }

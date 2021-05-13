@@ -19,7 +19,7 @@ namespace Infrastructure.Repositories
         }
         public override async Task<Genre> GetByIdAsync(int id)
         {
-            var entity = await _dbContext.Genres.Include( g => g.MovieGenres).FirstOrDefaultAsync(g => g.Id == id);
+            var entity = await _dbContext.Genres.Include( g => g.MovieGenres).ThenInclude(g => g.Movie).FirstOrDefaultAsync(g => g.Id == id);
             return entity;
         }
     }

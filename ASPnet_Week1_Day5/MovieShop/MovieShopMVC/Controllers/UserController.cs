@@ -25,7 +25,7 @@ namespace MovieShop.MVC.Controllers
             return View(userPurchase);
         }
         [HttpGet]
-        [Authorize]
+       // [Authorize]
         public async Task<IActionResult> Purchases(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);

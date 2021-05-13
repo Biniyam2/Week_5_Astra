@@ -16,8 +16,8 @@ namespace ApplicationCore.Models.Response
         public DateTime PurchaseDateTime { get; set; }
         public int MovieId { get; set; }
 
-        public User User { get; set; }
-        public Movie Movie { get; set; }
+        public IEnumerable<UserResponse> User { get; set; }
+        public  IEnumerable<MovieResponse> Movie { get; set; }
         //public UserResponse UserResponse { get; set; }
         //public MovieResponse  MovieResponse { get; set; }
     }

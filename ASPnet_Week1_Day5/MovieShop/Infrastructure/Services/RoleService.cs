@@ -12,7 +12,7 @@ using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Services
 {
-    public class RoleService : IRoleService
+    public class RoleService :ResponseConverter, IRoleService
     {
         private readonly IRoleRepository _repository;
         public RoleService(IRoleRepository repository)
@@ -30,8 +30,7 @@ namespace Infrastructure.Services
             RoleResponse roleResponse = new RoleResponse()
             {
                 Id = role2.Id,
-                Name = role2.Name,
-                UserRoles = (ICollection<UserRole>)role.UserRoles.Where(mc => mc.RoleId == role.Id).Select(r => r.User)
+                Name = role2.Name
             };
             return roleResponse;
         }
@@ -62,7 +61,7 @@ namespace Infrastructure.Services
             RoleResponse roleResponse = new RoleResponse() {
                 Id = role.Id,
                 Name = role.Name,
-                UserRoles = (ICollection<UserRole>)role.UserRoles.Where(mc => mc.RoleId == role.Id).Select(r => r.User)
+                UserResponses = UsersResponses( role.UserRoles.Where(mc => mc.RoleId == role.Id).Select(ur => ur.User).ToList() )
             };
             return roleResponse;
         }
@@ -79,7 +78,7 @@ namespace Infrastructure.Services
             {
                 Id = role2.Id,
                 Name = role2.Name,
-                UserRoles = (ICollection<UserRole>)role.UserRoles.Where(mc => mc.RoleId == role.Id).Select(r => r.User)
+                UserRoles = UserRolesResponses(role2.UserRoles.Where(mc => mc.RoleId == role.Id).ToList())
             };
             return roleResponse;
         }

@@ -1,4 +1,5 @@
-﻿using Infrastructure.Services;
+﻿using ApplicationCore.ServiceInterfaces;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,8 +13,8 @@ namespace MovieShop.API.Controllers
     [ApiController]
     public class CastController : ControllerBase
     {
-        private readonly CastService _castService;
-        public CastController(CastService castService)
+        private readonly ICastService _castService;
+        public CastController(ICastService castService)
         {
             _castService = castService;
         }
@@ -22,7 +23,7 @@ namespace MovieShop.API.Controllers
         public async Task<IActionResult> GetCastById(int id) 
         {
             var cast =await _castService.GetCastByIdAsync(id);
-            return cast == null ? Ok(cast) : NotFound("No Cast Found");
+            return cast != null ? Ok(cast) : NotFound("No Cast Found");
         }
     }
 }

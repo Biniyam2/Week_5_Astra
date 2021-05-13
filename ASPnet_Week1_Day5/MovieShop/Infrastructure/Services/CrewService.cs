@@ -12,7 +12,7 @@ using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Services
 {
-    public class CrewService : ICrewService
+    public class CrewService : ResponseConverter, ICrewService
     {
        
         private readonly ICrewRepository _crewRepsoitory;
@@ -37,8 +37,7 @@ namespace Infrastructure.Services
                 Name = cast.Name,
                 Gender = cast.Gender,
                 TmdbUrl = cast.TmdbUrl,
-                ProfilePath = cast.ProfilePath,
-                MovieCrews = (ICollection<MovieCrew>)cast.MovieCrews.Where(mc => mc.CrewId == cast.Id).Select(mc => mc.Movie)
+                ProfilePath = cast.ProfilePath
             };
             return castResponse;
         }
@@ -82,7 +81,7 @@ namespace Infrastructure.Services
                 Gender = cast.Gender,
                 TmdbUrl = cast.TmdbUrl,
                 ProfilePath = cast.ProfilePath,
-                MovieCrews = (ICollection<MovieCrew>)cast.MovieCrews.Where(mc => mc.CrewId == cast.Id).Select(mc => mc.Movie)
+                MovieCrews = MovieCrewsResponse ( cast.MovieCrews).Where(mc => mc.CrewId == cast.Id)
             };
             return castResponse;
         }
@@ -104,7 +103,7 @@ namespace Infrastructure.Services
                 Gender = cast.Gender,
                 TmdbUrl = cast.TmdbUrl,
                 ProfilePath = cast.ProfilePath,
-                MovieCrews = (ICollection<MovieCrew>)cast.MovieCrews.Where(mc => mc.CrewId == cast.Id).Select(mc => mc.Movie)
+                MovieCrews = MovieCrewsResponse(cast.MovieCrews).Where(mc => mc.CrewId == cast.Id)
             };
             return castResponse;
         }

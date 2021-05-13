@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class CastService : ICastService
+    public class CastService : ResponseConverter, ICastService
     {
         private readonly ICastRepository _castRepository;
 
@@ -35,11 +35,11 @@ namespace Infrastructure.Services
 
             CastResponse castResponse = new CastResponse()
             {
+                Id = castRes.Id,
                 Gender = castRes.Gender,
                 Name = castRes.Name,
                 TmdbUrl = castRes.TmdbUrl,
-                ProfilePath = castRes.ProfilePath,
-                MovieCasts = (ICollection<MovieCast>)castRes.MovieCasts.Where(mc => mc.CastId == cast.Id).Select(mc => mc.Movie)
+                ProfilePath = castRes.ProfilePath
 
             };
             return castResponse;
@@ -59,11 +59,11 @@ namespace Infrastructure.Services
 
             CastResponse castResponse = new CastResponse()
             {
+                Id = castRes.Id,
                 Gender = castRes.Gender,
                 Name = castRes.Name,
                 TmdbUrl = castRes.TmdbUrl,
-                ProfilePath = castRes.ProfilePath,
-                MovieCasts = (ICollection<MovieCast>)castRes.MovieCasts.Where(mc => mc.CastId == cast.Id).Select(mc => mc.Movie)
+                ProfilePath = castRes.ProfilePath
 
             };
             return castResponse;
@@ -76,7 +76,7 @@ namespace Infrastructure.Services
                 Gender = castRequest.Gender,
                 Name = castRequest.Name,
                 TmdbUrl = castRequest.TmdbUrl,
-                ProfilePath = castRequest.ProfilePath
+                ProfilePath = castRequest.ProfilePath,
             };
            await _castRepository.DeleteAsync(cast);
 
@@ -91,12 +91,11 @@ namespace Infrastructure.Services
             foreach (var item in cast)
             {
                 castResponses.Add(new CastResponse {
-
+                    Id = item.Id,
                     Gender = item.Gender,
                     Name = item.Name,
                     TmdbUrl = item.TmdbUrl,
-                    ProfilePath = item.ProfilePath,
-                    MovieCasts = (ICollection<MovieCast>)item.MovieCasts.Where(mc => mc.CastId == item.Id).Select(mc => mc.Movie)
+                    ProfilePath = item.ProfilePath
                 });
             }
             return castResponses;
@@ -105,12 +104,12 @@ namespace Infrastructure.Services
         {
             var cast =await _castRepository.GetByIdAsync(id);
             CastResponse castResponse = new CastResponse() {
+                Id = cast.Id,
                 Gender = cast.Gender,
                 Name = cast.Name,
                 TmdbUrl = cast.TmdbUrl,
                 ProfilePath = cast.ProfilePath,
-                MovieCasts= (ICollection<MovieCast>)cast.MovieCasts.Where(mc => mc.CastId == cast.Id).Select(mc => mc.Movie)
-
+                MovieCasts = MovieCastResponses(cast.MovieCasts)
             };
             return castResponse;
         }

@@ -26,6 +26,14 @@ namespace MovieShop.API.Controllers
 
             return genres.Any() ? Ok(genres) : NotFound("oops No genre found!!");
         }
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetAllGenres(int id)
+        {
+            var genres = await _genreService.GetGenreByIdAsync(id);
+
+            return genres != null ? Ok(genres) : NotFound("oops No genre found!!");
+        }
 
     }
 }

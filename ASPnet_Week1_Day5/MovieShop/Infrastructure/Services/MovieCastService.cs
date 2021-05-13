@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class MovieCastService : IMovieCastService
+    public class MovieCastService :  IMovieCastService
     {
         private readonly IMovieCastRepository _repository;
         public MovieCastService(IMovieCastRepository repository)

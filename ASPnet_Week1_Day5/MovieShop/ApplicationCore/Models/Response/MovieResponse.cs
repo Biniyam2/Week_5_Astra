@@ -32,13 +32,13 @@ namespace ApplicationCore.Models.Response
         //public IEnumerable<MovieCast> MovieCasts { get; set; }
         //public IEnumerable<MovieGenre> MovieGenres { get; set; }
 
-        public IEnumerable<Crew> Crews { get; set; }
-        public IEnumerable<Cast> Casts { get; set; }
-        public IEnumerable<Genre> Genres { get; set; }
+        public IEnumerable<CrewResponse> Crews { get; set; }
+        public IEnumerable<CastResponse> Casts { get; set; }
+        public IEnumerable<GenreResponse> Genres { get; set; }
 
-        public IEnumerable<Review> Reviews{ get; set; }
-        public IEnumerable<Favorite> Favorites { get; set; }
-        public IEnumerable<Purchase> Purchases { get; set; }
-        public IEnumerable<Trailer> Trailers { get; set; }
+        public IEnumerable<ReviewResponse> Reviews{ get; set; }
+        public IEnumerable<FavoriteResponse> Favorites { get; set; }
+        public IEnumerable<PurchaseResponse> Purchases { get; set; }
+        public IEnumerable<TrailerResponse> Trailers { get; set; }
     }
 }

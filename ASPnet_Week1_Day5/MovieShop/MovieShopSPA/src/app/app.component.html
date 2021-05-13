@@ -1,6 +1,13 @@
-<h1>
-  {{title.trim}}
-</h1>
-<app-genres> </app-genres>
 
-<router-outlet> </router-outlet>
+<div>
+ <app-header> </app-header>
+<app-genres> </app-genres>
+  <button type="button" class="btn btn-primary">
+
+  </button>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-footer></app-footer>
+</div>

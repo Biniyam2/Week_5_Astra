@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Infrastructure.Data;
-using Microsoft.OpenApi.Models;
 using ApplicationCore.RepositoryInterfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 

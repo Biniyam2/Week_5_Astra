@@ -43,12 +43,13 @@ namespace MovieShop.API.Controllers
         public async Task<IActionResult> GetTopRatedMovies()
         {
             var movies = await _movieService.GetTopRatedMovies();
-            return movies.Any() ? Ok(movies.OrderByDescending(m => m.Rating)) : NotFound("No Movies Found");
+            return movies.Any() ? Ok(movies) : NotFound("No Movies Found");
         }
         [HttpGet]
         [Route("genre/{genreId}")]
         public async Task<IActionResult> GetMoviesByGenre( int genreId)
         {
+            
             var movies = await _movieService.GetMoviesByGenreAsync(genreId);
             return movies.Any() ? Ok(movies) : NotFound("No Movies Found");
         }

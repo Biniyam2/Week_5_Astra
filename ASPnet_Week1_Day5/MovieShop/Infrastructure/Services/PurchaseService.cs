@@ -12,7 +12,7 @@ using ApplicationCore.RepositoryInterfaces;
 
 namespace Infrastructure.Services
 {
-    public class PurchaseService : IPurchaseService
+    public class PurchaseService :ResponseConverter, IPurchaseService
     {
         private readonly IPurchaseRepository _repository;
         public PurchaseService(IPurchaseRepository repository)
@@ -67,8 +67,10 @@ namespace Infrastructure.Services
                     PurchaseNumber = item.PurchaseNumber,
                     TotalPrice = item.TotalPrice,
                     PurchaseDateTime = item.PurchaseDateTime,
-                    MovieId = item.MovieId
-
+                    MovieId = item.MovieId,
+                    User = UsersResponses(  new List<User> { item.User }),
+                    Movie = MoviesResponses(new List<Movie> { item.Movie })
+                    
                 });
             }
             return purchases;
@@ -82,7 +84,9 @@ namespace Infrastructure.Services
                 PurchaseNumber = p.PurchaseNumber,
                 TotalPrice = p.TotalPrice,
                 PurchaseDateTime = p.PurchaseDateTime,
-                MovieId = p.MovieId
+                MovieId = p.MovieId,
+                User = UsersResponses(new List<User> { p.User }),
+                Movie = MoviesResponses(new List<Movie> { p.Movie })
             };
             return purchaseResponse;
         }
